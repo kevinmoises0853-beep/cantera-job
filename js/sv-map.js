@@ -355,7 +355,7 @@ export function mountSVMap(container, options = {}) {
   renderer.toneMappingExposure = 1.05;
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-  const maxDpr = mobile ? 1.75 : 2;
+  const maxDpr = 1.5;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
   root.appendChild(renderer.domElement);
   root.appendChild(layer);
@@ -1343,7 +1343,7 @@ function mountLight(container, opt) {
   renderer.setClearColor(0xffffff, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.NoToneMapping;
-  const maxDpr = mobile ? 1.75 : 2;
+  const maxDpr = 1.5;
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, maxDpr));
   root.appendChild(renderer.domElement); root.appendChild(layer); container.appendChild(root);
   renderer.domElement.setAttribute('role', 'img');

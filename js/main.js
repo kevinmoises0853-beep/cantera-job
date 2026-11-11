@@ -78,16 +78,33 @@ function heroIntro() {
   const hc = $('.hc-num'); if (hc) setTimeout(() => counter(hc, 22, 1.6), 900);
 }
 
+/* Peso según pantalla y conexión: el hosting entrega pocos Mbps, cada video va muy por debajo */
+const conn = navigator.connection || {};
+const slowNet = !!conn.saveData || /(^|-)2g$|3g/.test(conn.effectiveType || '');
+const wp = (p, w) => p.replace(/\.jpg$/, `-${w}.webp`);
+const srcset = p => `${wp(p, 480)} 480w, ${wp(p, 960)} 960w, ${wp(p, 1600)} 1600w`;
+
+(function heroVideo() {
+  const v = $('#heroVideo'); if (!v) return;
+  const w = window.innerWidth;
+  if (w <= 900) v.poster = 'assets/img/hero-poster-960.webp';
+  if (reduced) return;
+  const q = (slowNet || w <= 700) ? '540' : (w < 1280 ? '720' : '1080');
+  v.src = `assets/video/hero-loop-${q}.mp4`;
+  v.preload = 'auto';
+  const tryPlay = () => v.play().catch(() => {});
+  v.addEventListener('canplay', tryPlay, { once: true });
+  // fuera de pantalla no decodifica ni compite con lo demás
+  new IntersectionObserver(es => es.forEach(e => { e.isIntersecting ? tryPlay() : v.pause(); }), { threshold: .05 }).observe(v);
+})();
+
 (function preload() {
   const pre = $('#preloader'); const num = $('#preNum'); const bar = $('#preBar');
-  const vid = $('#heroVideo');
   if (!hasGSAP || reduced) { pre.remove(); heroIntro(); return; }
   lenis?.stop();
   // seguro: si las animaciones se congelan (pestaña en segundo plano), nunca dejar la página bloqueada
   setTimeout(() => { if (document.getElementById('preloader')) { gsap.killTweensOf('*'); pre.remove(); heroIntro(); } }, 4500);
-  let ready = false;
-  const markReady = () => { ready = true; };
-  if (vid.readyState >= 3) markReady(); else { vid.addEventListener('canplay', markReady, { once: true }); setTimeout(markReady, 1400); }
+  const ready = true; // la portada ya tiene su foto; el video entra solo cuando alcanza a cargar
   const o = { v: 0 };
   gsap.to(o, { v: 22, duration: 1.5, ease: 'power2.inOut', onUpdate: () => { num.textContent = Math.round(o.v); gsap.set(bar, { scaleX: o.v / 22 }); }, onComplete: finish });
   function finish() {
@@ -209,30 +226,31 @@ function setupProcess() {
 setupProcess();
 
 /* ---------------- film ---------------- */
-(async function film() {
+(function film() {
   const frame = $('#filmFrame'), v = $('#filmVideo'), play = $('#filmPlay');
   const ctr = $('#filmControls');
-  const FILM = 'assets/video/film-cantera-job.mp4';
-  const exists = async (u) => { try { const r = await fetch(u, { method: 'HEAD' }); return r.ok; } catch { return false; } };
-  const hasFilm = await exists(FILM);
-  const hasTeaser = await exists('assets/video/film-teaser.mp4');
-  const hasPoster = await exists('assets/video/film-cantera-job-poster.jpg');
-  if (!hasPoster) v.poster = 'assets/img/planta-aerea.jpg';
-  if (!hasTeaser) { v.innerHTML = '<source src="assets/video/hero-loop-720.mp4" type="video/mp4">'; v.load(); }
-  // teaser autoplay when visible
-  const tio = new IntersectionObserver(es => es.forEach(e => { if (frame.classList.contains('playing') || frame.classList.contains('paused')) return; e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }), { threshold: .3 });
-  tio.observe(frame);
-  v.addEventListener('loadedmetadata', () => {
-    if (frame.classList.contains('playing') && isFinite(v.duration)) { const m = Math.floor(v.duration / 60), s = Math.round(v.duration % 60); $('#filmDur').textContent = `${m}:${String(s).padStart(2, '0')}`; }
-  });
+  // 1080p ligera en pantallas grandes; 720p en celular, tablet o conexión lenta
+  const FILM = (slowNet || window.innerWidth < 1000) ? 'assets/video/film-cantera-job-720.mp4' : 'assets/video/film-cantera-job.mp4';
+  const TEASER = 'assets/video/film-teaser.mp4';
+  const busy = () => frame.classList.contains('playing') || frame.classList.contains('paused');
+  if (window.innerWidth <= 700) v.poster = 'assets/video/film-cantera-job-poster-480.webp';
+  // el avance mudo solo se descarga cuando la sección entra en pantalla
+  new IntersectionObserver(es => es.forEach(e => {
+    if (busy() || reduced) return;
+    if (e.isIntersecting) { if (!v.currentSrc) { v.src = TEASER; v.preload = 'auto'; } v.play().catch(() => {}); }
+    else v.pause();
+  }), { threshold: .3 }).observe(frame);
 
-  async function start() {
-    if (!hasFilm) { toast('La película se está terminando de editar — vuelve a intentarlo en unos minutos.'); return; }
+  // sin esperas antes de play(): Safari y iPhone exigen que arranque dentro del toque
+  function start() {
     v.pause();
-    v.innerHTML = `<source src="${FILM}" type="video/mp4">` + (await exists('assets/video/film-cantera-job.vtt') ? '<track kind="subtitles" srclang="es" label="Español" src="assets/video/film-cantera-job.vtt" default>' : '');
+    v.innerHTML = '<track kind="subtitles" srclang="es" label="Español" src="assets/video/film-cantera-job.vtt" default>';
+    v.src = FILM; v.preload = 'auto';
     v.loop = false; v.muted = false; v.controls = false; v.load();
     frame.classList.add('playing'); frame.classList.remove('paused'); ctr.hidden = false;
-    try { await v.play(); } catch { v.muted = true; v.play(); }
+    $('#fcProg').style.width = '0%';
+    const p = v.play();
+    if (p) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
   }
   play.addEventListener('click', start);
   $$('[data-open-film]').forEach(b => b.addEventListener('click', () => { scrollToEl('#pelicula'); setTimeout(start, 900); }));
@@ -242,7 +260,11 @@ setupProcess();
   $('#fcFull').addEventListener('click', () => { (frame.requestFullscreen || frame.webkitRequestFullscreen)?.call(frame); });
   $('#fcBar').addEventListener('click', e => { const r = e.currentTarget.getBoundingClientRect(); if (isFinite(v.duration)) v.currentTime = (e.clientX - r.left) / r.width * v.duration; });
   v.addEventListener('timeupdate', () => { if (frame.classList.contains('playing') && v.duration) $('#fcProg').style.width = (v.currentTime / v.duration * 100) + '%'; });
-  v.addEventListener('ended', () => { frame.classList.remove('playing', 'paused'); ctr.hidden = true; v.load(); });
+  v.addEventListener('ended', () => {
+    if (!busy()) return;
+    frame.classList.remove('playing', 'paused'); ctr.hidden = true;
+    v.innerHTML = ''; v.muted = true; v.loop = true; v.src = TEASER; v.play().catch(() => {});
+  });
 })();
 
 /* ---------------- products ---------------- */
@@ -250,7 +272,7 @@ setupProcess();
   const list = $('#prodList');
   list.innerHTML = PRODUCTS.map((p, i) => `
     <button class="prod-item${i === 0 ? ' on' : ''}" role="tab" aria-selected="${i === 0}" data-id="${p.id}">
-      <span class="pi-thumb"><img src="${p.img}" alt="" loading="lazy"></span>
+      <span class="pi-thumb"><img src="${wp(p.img, 480)}" alt="" loading="lazy" decoding="async" width="56" height="56"></span>
       <span><span class="pi-t">${p.name}</span><br><span class="pi-s">${p.use}</span></span>
       <span class="pi-p">$${p.price}</span>
     </button>`).join('');
@@ -259,7 +281,7 @@ setupProcess();
     $$('.prod-item').forEach(b => { const on = b.dataset.id === id; b.classList.toggle('on', on); b.setAttribute('aria-selected', on); });
     const img = $('#pdImg');
     const swap = () => {
-      img.src = p.img; img.alt = p.name;
+      img.srcset = srcset(p.img); img.src = wp(p.img, 960); img.alt = p.name;
       $('#pdName').textContent = p.name; $('#pdDesc').textContent = p.desc;
       $('#pdBadge').textContent = p.tag || '';
       $('#pdTags').innerHTML = p.tags.map(t => `<span>${t}</span>`).join('');
@@ -383,19 +405,10 @@ setupProcess();
   try { const r = await fetch('assets/video/chapters.json', { cache: 'no-cache' }); if (r.ok) chapters = await r.json(); } catch {}
   const fix = p => p && !p.startsWith('assets/') ? 'assets/video/' + p : p;
   chapters = chapters.map(c => ({ ...c, file: fix(c.file), poster: fix(c.poster), vtt: fix(c.vtt) }));
-  if (!chapters.length) {
-    chapters = [
-      { id: 'v1', title: 'La visión', quote: 'Cantera JOB nace con una visión clara: aprovechar los recursos naturales de manera responsable.', poster: 'assets/img/vocero-vision.jpg' },
-      { id: 'v2', title: 'Piedra basáltica', quote: 'Tenemos hoy la materia prima para construir todos los desarrollos de Acres Inmobiliaria.', poster: 'assets/img/hermanos-piedra.jpg' },
-      { id: 'v3', title: 'Logística propia', quote: 'Tenemos la materia prima, la maquinaria, los camiones y el punto de trituración.', poster: 'assets/img/duo-entrevista.jpg' },
-      { id: 'v4', title: 'El primer viaje', quote: 'La grava 3/4" la vamos a llevar directamente hasta Condado Quetzal.', poster: 'assets/img/carga-camion-aerea.jpg' },
-      { id: 'v5', title: 'Del cerro a la norma', quote: 'Bajo el control de calidad más riguroso para cumplir con la norma.', poster: 'assets/img/cerro-basalto.jpg' },
-      { id: 'v6', title: 'Detrás de cada casa', quote: 'Detrás de una torre, una urbanización o una pequeña casa hay todo un proceso de transformación.', poster: 'assets/img/foto-DSC05317.jpg' },
-    ];
-  }
+  if (!chapters.length) return;
   const fmt = s => s ? `${Math.floor(s / 60)}:${String(Math.round(s % 60)).padStart(2, '0')}` : '';
   list.innerHTML = chapters.map((c, i) => `<li><button class="vp-item${i === 0 ? ' on' : ''}" data-i="${i}">
-      <span class="vp-th"><img src="${c.poster}" alt="" loading="lazy">${c.duration_s ? `<span>${fmt(c.duration_s)}</span>` : ''}</span>
+      <span class="vp-th"><img src="${wp(c.poster, 480)}" alt="" loading="lazy" decoding="async">${c.duration_s ? `<span>${fmt(c.duration_s)}</span>` : ''}</span>
       <span><span class="mono">${String(i + 1).padStart(2, '0')}</span><h4>${c.title}</h4><p>${c.quote}</p><span class="vp-prog"><i></i></span></span>
     </button></li>`).join('');
   let cur = 0;
@@ -403,11 +416,10 @@ setupProcess();
     cur = i; const c = chapters[i];
     $$('.vp-item', list).forEach(b => b.classList.toggle('on', +b.dataset.i === i));
     q.textContent = `“${c.quote}”`;
-    v.poster = c.poster;
-    if (c.file) {
-      v.innerHTML = `<source src="${c.file}" type="video/mp4">` + (c.vtt ? `<track kind="subtitles" srclang="es" label="Español" src="${c.vtt}" default>` : '');
-      v.load(); if (autoplay) v.play().catch(() => {});
-    } else { v.removeAttribute('src'); v.innerHTML = ''; if (autoplay) toast('Este clip se está terminando de editar.'); }
+    v.poster = wp(c.poster, window.innerWidth <= 700 ? 480 : 1280);
+    v.innerHTML = c.vtt ? `<track kind="subtitles" srclang="es" label="Español" src="${c.vtt}" default>` : '';
+    v.src = c.file; v.preload = autoplay ? 'auto' : 'none';
+    v.load(); if (autoplay) v.play().catch(() => {});
   }
   list.addEventListener('click', e => { const b = e.target.closest('.vp-item'); if (b) load(+b.dataset.i, true); });
   v.addEventListener('play', () => frame.classList.add('playing'));
