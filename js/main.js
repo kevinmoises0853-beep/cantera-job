@@ -81,6 +81,7 @@ function heroIntro() {
 /* Peso según pantalla y conexión: el hosting entrega pocos Mbps, cada video va muy por debajo */
 const conn = navigator.connection || {};
 const slowNet = !!conn.saveData || /(^|-)2g$|3g/.test(conn.effectiveType || '');
+const IMG_CDN = 'https://cdn.jsdelivr.net/gh/kevinmoises0853-beep/cantera-job@a9a6360ff33b97d03cf1b930a9232764f97fcb44/';
 const wp = (p, w) => IMG_CDN + p.replace(/\.jpg$/, `-${w}.webp`);
 const srcset = p => `${wp(p, 480)} 480w, ${wp(p, 960)} 960w, ${wp(p, 1600)} 1600w`;
 
