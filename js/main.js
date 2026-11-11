@@ -81,13 +81,14 @@ function heroIntro() {
 /* Peso según pantalla y conexión: el hosting entrega pocos Mbps, cada video va muy por debajo */
 const conn = navigator.connection || {};
 const slowNet = !!conn.saveData || /(^|-)2g$|3g/.test(conn.effectiveType || '');
-const wp = (p, w) => p.replace(/\.jpg$/, `-${w}.webp`);
+const IMG_CDN = 'https://cdn.jsdelivr.net/gh/kevinmoises0853-beep/cantera-job@d4a5efe5f7cdb1c63c4c53da809d86703892bbb7/';
+const wp = (p, w) => IMG_CDN + p.replace(/\.jpg$/, `-${w}.webp`);
 const srcset = p => `${wp(p, 480)} 480w, ${wp(p, 960)} 960w, ${wp(p, 1600)} 1600w`;
 
 (function heroVideo() {
   const v = $('#heroVideo'); if (!v) return;
   const w = window.innerWidth;
-  if (w <= 900) v.poster = 'assets/img/hero-poster-960.webp';
+  if (w <= 900) v.poster = IMG_CDN + 'assets/img/hero-poster-960.webp';
   if (reduced) return;
   const fastNet = (conn.downlink || 0) >= 9;
   const q = (slowNet || w <= 700) ? '540' : ((w >= 1280 && fastNet) ? '1080' : '720');
@@ -255,7 +256,7 @@ setupProcess();
   });
   const TEASER = 'assets/video/film-teaser.mp4';
   const busy = () => frame.classList.contains('playing') || frame.classList.contains('paused');
-  if (window.innerWidth <= 700) v.poster = 'assets/video/film-cantera-job-poster-480.webp';
+  if (window.innerWidth <= 700) v.poster = IMG_CDN + 'assets/video/film-cantera-job-poster-480.webp';
   // el avance mudo solo se descarga cuando la sección entra en pantalla
   new IntersectionObserver(es => es.forEach(e => {
     if (busy() || reduced) return;
