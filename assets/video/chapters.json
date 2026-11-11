@@ -1,0 +1,56 @@
+[
+  {
+    "id": "voz-01",
+    "file": "voz-01-vision.mp4",
+    "poster": "voz-01-vision-poster.jpg",
+    "vtt": "voz-01-vision.vtt",
+    "title": "La visión",
+    "quote": "Cantera JOB nace con una visión clara.",
+    "duration_s": 17.4
+  },
+  {
+    "id": "voz-02",
+    "file": "voz-02-basalto.mp4",
+    "poster": "voz-02-basalto-poster.jpg",
+    "vtt": "voz-02-basalto.vtt",
+    "title": "Piedra basáltica",
+    "quote": "JOB Constructora tiene hoy la materia prima.",
+    "duration_s": 26.0
+  },
+  {
+    "id": "voz-03",
+    "file": "voz-03-logistica.mp4",
+    "poster": "voz-03-logistica-poster.jpg",
+    "vtt": "voz-03-logistica.vtt",
+    "title": "Logística propia",
+    "quote": "Manejar la cadena de suministros siempre es clave.",
+    "duration_s": 43.0
+  },
+  {
+    "id": "voz-04",
+    "file": "voz-04-primer-viaje.mp4",
+    "poster": "voz-04-primer-viaje-poster.jpg",
+    "vtt": "voz-04-primer-viaje.vtt",
+    "title": "El primer viaje",
+    "quote": "Lo vamos a llevar directamente hasta Condado Quetzal.",
+    "duration_s": 14.5
+  },
+  {
+    "id": "voz-05",
+    "file": "voz-05-del-cerro-a-la-norma.mp4",
+    "poster": "voz-05-del-cerro-a-la-norma-poster.jpg",
+    "vtt": "voz-05-del-cerro-a-la-norma.vtt",
+    "title": "Del cerro a la norma",
+    "quote": "Bajo el control de calidad más riguroso, para cumplir con la norma.",
+    "duration_s": 22.8
+  },
+  {
+    "id": "voz-06",
+    "file": "voz-06-detras-de-cada-casa.mp4",
+    "poster": "voz-06-detras-de-cada-casa-poster.jpg",
+    "vtt": "voz-06-detras-de-cada-casa.vtt",
+    "title": "Detrás de cada casa",
+    "quote": "Detrás de una pequeña casa hay todo un proceso de transformación.",
+    "duration_s": 15.2
+  }
+]

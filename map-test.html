@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa SV · prueba</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--ink:#0b1118;--navy:#101b27;--steel:#1b2a3a;--line:rgba(255,255,255,.08);--brand:#2463d0;--amber:#e09a3e;--mut:rgba(255,255,255,.6)}
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--ink);color:#fff;font-family:Inter,system-ui,sans-serif}
+  section{padding:56px 16px 48px;border-bottom:1px solid var(--line)}
+  .s1{background:linear-gradient(180deg,#0b1118 0%,#101b27 100%)}
+  .s2{background:#0f1923}
+  .wrap{max-width:1280px;margin:0 auto}
+  .eyebrow{font:600 11px/1 Inter;letter-spacing:.18em;text-transform:uppercase;color:#7cc4ff}
+  h2{font:800 clamp(28px,4vw,44px)/1.05 Archivo;margin:12px 0 8px;letter-spacing:-.02em}
+  p{color:var(--mut);margin:0;max-width:640px}
+  .bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 10px}
+  .chip{font:600 12px/1 Inter;padding:9px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);color:#fff;cursor:pointer}
+  .chip[aria-pressed=true]{background:var(--brand);border-color:var(--brand)}
+  .stats{display:flex;gap:28px;margin-left:auto;font:500 11px/1 Inter;color:var(--mut);letter-spacing:.06em;text-transform:uppercase}
+  .stats b{display:block;font:600 22px/1 'JetBrains Mono';color:#fff;margin-bottom:6px;letter-spacing:-.03em}
+  .map{position:relative;height:min(72vh,720px);min-height:420px}
+  .map.sel{height:min(56vh,520px);min-height:340px}
+  .out{font:500 13px/1.5 'JetBrains Mono';color:#cfe3ff;margin-top:12px;min-height:20px}
+  @media (max-width:700px){.stats{margin-left:0;gap:18px}.map{height:62vh;min-height:360px}}
+</style>
+</head>
+<body>
+<section class="s1">
+  <div class="wrap">
+    <div class="eyebrow">Cobertura · modo routes</div>
+    <h2>Rutas de entrega desde Ciudad Arce</h2>
+    <p>Geometría real de carretera (OSRM). Pasá el cursor por un destino o un departamento.</p>
+    <div class="bar" id="chips">
+      <button class="chip" data-z="" aria-pressed="true">Todas</button>
+      <button class="chip" data-z="A">Zona A</button>
+      <button class="chip" data-z="B">Zona B</button>
+      <button class="chip" data-z="C">Zona C</button>
+      <button class="chip" data-z="D">Zona D</button>
+      <button class="chip" id="replay">Repetir intro</button>
+      <div class="stats"><div><b id="st-r">–</b>Rutas</div><div><b id="st-k">–</b>Km de red</div><div><b id="st-t">–</b>Camiones</div></div>
+    </div>
+    <div class="map" id="map-routes"></div>
+  </div>
+</section>
+<section class="s2">
+  <div class="wrap">
+    <div class="eyebrow">Cotizar · modo select</div>
+    <h2>¿A dónde enviamos?</h2>
+    <p>Clic en un departamento para seleccionarlo.</p>
+    <div class="map sel" id="map-select"></div>
+    <div class="out" id="out">—</div>
+  </div>
+</section>
+<script type="module">
+  import { mountSVMap, zoneForDepartment, kmForDepartment } from './js/sv-map.js';
+  const $ = (s) => document.querySelector(s);
+  const intro = !new URLSearchParams(location.search).has('nointro');
+  const routes = mountSVMap($('#map-routes'), {
+    mode: 'routes', intro,
+    onStats: (s) => { $('#st-r').textContent = s.routes; $('#st-k').textContent = s.km; $('#st-t').textContent = s.trucksActive; },
+  });
+  document.querySelectorAll('#chips [data-z]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('#chips [data-z]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    routes.focusZone(b.dataset.z || null);
+  }));
+  $('#replay').addEventListener('click', () => routes.playIntro());
+  const sel = mountSVMap($('#map-select'), {
+    mode: 'select',
+    onSelect: (d) => { $('#out').textContent = JSON.stringify(d) + `  · zoneForDepartment=${zoneForDepartment(d.id)} kmForDepartment=${kmForDepartment(d.id)}`; },
+  });
+  window.__maps = { routes, sel };
+</script>
+</body>
+</html>

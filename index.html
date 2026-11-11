@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cantera JOB · La piedra que aguanta</title>
+<meta name="description" content="Grava triturada de basalto con informe de laboratorio y precio claro. Cantera JOB, Ciudad Arce, La Libertad, El Salvador.">
+<meta name="theme-color" content="#0b1118">
+<link rel="icon" href="assets/brand/logo-color-iso.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+<link rel="preload" as="image" href="assets/img/hero-poster.jpg">
+</head>
+<body class="is-loading">
+
+<!-- ============ PRELOADER ============ -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="pre-inner">
+    <img class="pre-mark" src="assets/brand/logo-color-iso.png" alt="">
+    <div class="pre-count"><span id="preNum">0</span><small>%</small></div>
+    <p class="pre-cap">de desgaste Los Ángeles. La norma permite 50 %.</p>
+    <div class="pre-bar"><i id="preBar"></i></div>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<div class="topbar">
+  <div class="wrap topbar-in">
+    <span><i class="dot-live"></i> Planta en operación · Ciudad Arce, La Libertad</span>
+    <span class="hide-sm">Lun–Sáb 6:00 a.m. – 4:00 p.m. · Pedidos antes de las 2 p.m. se entregan al día siguiente</span>
+    <a href="#cotizar" class="topbar-link">Pedir ficha técnica →</a>
+  </div>
+</div>
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="nav-logo" aria-label="Cantera JOB, inicio"><img src="assets/brand/logo-white-text.png" alt="Cantera JOB"></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#productos">Productos</a>
+      <a href="#calidad">Calidad</a>
+      <a href="#logistica">Logística</a>
+      <a href="#voces">Voces</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#cotizar" class="btn btn-primary btn-sm magnetic"><span>Cotizar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="nav-burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#productos">Productos</a><a href="#calidad">Calidad</a><a href="#logistica">Logística</a><a href="#voces">Voces</a><a href="#cotizar" class="mm-cta">Cotizar ahora</a>
+</div>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="hero">
+  <div class="hero-media">
+    <video id="heroVideo" autoplay muted loop playsinline preload="auto" poster="assets/img/hero-poster.jpg">
+      <source src="assets/video/hero-loop-720.mp4" type="video/mp4" media="(max-width: 900px)">
+      <source src="assets/video/hero-loop-1080.mp4" type="video/mp4">
+    </video>
+    <div class="hero-shade"></div>
+    <div class="grain"></div>
+  </div>
+  <div class="wrap hero-content">
+    <p class="eyebrow reveal-up"><span class="eyebrow-line"></span>Cantera JOB · Ciudad Arce, El Salvador</p>
+    <h1 class="hero-title" aria-label="La piedra que aguanta.">
+      <span class="line"><span class="word">La</span> <span class="word">piedra</span></span>
+      <span class="line"><span class="word">que</span> <span class="word accent">aguanta.</span></span>
+    </h1>
+    <p class="hero-sub reveal-up">Grava triturada de basalto con informe de laboratorio y precio claro. Del cerro de Ciudad Arce a tu obra, en cualquier punto del país.</p>
+    <div class="hero-actions reveal-up">
+      <a href="#cotizar" class="btn btn-primary btn-lg magnetic"><span>Cotizar mi material</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="btn btn-ghost btn-lg magnetic" data-open-film><span class="play-dot"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span><span>Ver la película</span></button>
+    </div>
+  </div>
+  <aside class="hero-card reveal-up" aria-label="Dato de laboratorio">
+    <div class="hc-row"><span class="hc-num mono" data-count="22">0</span><span class="hc-unit">%</span></div>
+    <p class="hc-label">Desgaste Los Ángeles<br><b>La norma permite 50 %</b></p>
+    <div class="hc-meter"><i style="--v:44%"></i><span class="hc-lim"></span></div>
+    <p class="hc-src mono">Informe LSM-CCA-01-2026 · ASTM C131</p>
+  </aside>
+  <div class="hero-bottom">
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Basalto triturado</span><i>◆</i><span>100 % caras fracturadas</span><i>◆</i><span>Ficha técnica con cada carga</span><i>◆</i><span>Báscula certificada</span><i>◆</i><span>Flota propia</span><i>◆</i><span>Tarifa pública por m³</span><i>◆</i><span>Mezclas hasta 450 kg/cm²</span><i>◆</i>
+        <span>Basalto triturado</span><i>◆</i><span>100 % caras fracturadas</span><i>◆</i><span>Ficha técnica con cada carga</span><i>◆</i><span>Báscula certificada</span><i>◆</i><span>Flota propia</span><i>◆</i><span>Tarifa pública por m³</span><i>◆</i><span>Mezclas hasta 450 kg/cm²</span><i>◆</i>
+      </div>
+    </div>
+    <a href="#pelicula" class="scroll-cue" aria-label="Bajar"><span></span></a>
+  </div>
+</section>
+
+<!-- ============ PELÍCULA ============ -->
+<section class="film-sec" id="pelicula">
+  <div class="wrap">
+    <div class="film-head">
+      <p class="kicker">01 — La película</p>
+      <h2 class="h2 split">Una decisión estratégica que forma parte de los cimientos del país.</h2>
+    </div>
+  </div>
+  <div class="film-stage" id="filmStage">
+    <div class="film-frame" id="filmFrame">
+      <video id="filmVideo" playsinline preload="metadata" poster="assets/video/film-cantera-job-poster.jpg" muted loop>
+        <source src="assets/video/film-teaser.mp4" type="video/mp4">
+      </video>
+      <button class="film-play" id="filmPlay" aria-label="Reproducir película con sonido">
+        <span class="fp-ring"></span>
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <div class="film-meta">
+        <span class="mono">Cantera JOB · Película de marca</span>
+        <span class="mono" id="filmDur">1:20</span>
+      </div>
+      <div class="film-controls" id="filmControls" hidden>
+        <button id="fcPlay" aria-label="Pausa"><svg viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></button>
+        <div class="fc-bar" id="fcBar"><i id="fcProg"></i></div>
+        <button id="fcMute" aria-label="Silenciar"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4z"/></svg></button>
+        <button id="fcCC" class="on" aria-label="Subtítulos">CC</button>
+        <button id="fcFull" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 0h2v6h-6v-2h4z"/></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="film-quote">“Una decisión estratégica, fundamental, que representa los cimientos de nuestros desarrollos inmobiliarios y el progreso de nuestro país.”</p>
+  </div>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="about" id="nosotros">
+  <div class="wrap about-grid">
+    <div class="about-text">
+      <p class="kicker">02 — Nosotros</p>
+      <h2 class="h2 split">Nace en el corazón de Ciudad Arce para abastecer al país.</h2>
+      <p class="lead">Cantera JOB es la planta de extracción y trituración de agregados de <b>Grupo JOB</b> — JOB Constructora y Acres Inmobiliaria. Producimos grava de basalto para concreto, gravilla, chispa, polvo de piedra y material selecto.</p>
+      <p>Abastecemos proyectos de infraestructura pública y privada y, como unidad estratégica, nuestros propios desarrollos inmobiliarios. Tenemos la materia prima, la maquinaria, los camiones y el punto de trituración: controlamos la calidad de principio a fin.</p>
+      <div class="pillars">
+        <div class="pillar"><span class="pi-n mono">01</span><h4>Piedra dura</h4><p>Grava que no se quiebra ni se deshace.</p></div>
+        <div class="pillar"><span class="pi-n mono">02</span><h4>Precio claro</h4><p>Tarifa pública por m³ y por viaje.</p></div>
+        <div class="pillar"><span class="pi-n mono">03</span><h4>Peso exacto</h4><p>Báscula certificada y ticket digital.</p></div>
+        <div class="pillar"><span class="pi-n mono">04</span><h4>Rapidez</h4><p>Pedí antes de las 2 p.m., te llega mañana.</p></div>
+      </div>
+    </div>
+    <div class="about-collage" aria-hidden="true">
+      <figure class="ac ac-1" data-speed="-0.08"><img src="assets/img/planta-aerea.jpg" alt="" loading="lazy"></figure>
+      <figure class="ac ac-2" data-speed="0.10"><img src="assets/img/hermanos-piedra.jpg" alt="" loading="lazy"></figure>
+      <figure class="ac ac-3" data-speed="0.18"><img src="assets/img/basalto-macro.jpg" alt="" loading="lazy"></figure>
+      <div class="ac-badge"><img src="assets/brand/logo-white-iso.png" alt=""><span>Est. 2026</span></div>
+    </div>
+  </div>
+  <div class="wrap stats" id="stats">
+    <div class="stat"><span class="stat-n mono"><b data-count="22">0</b>%</span><p>Desgaste Los Ángeles<br><small>Norma: máx. 50 %</small></p></div>
+    <div class="stat"><span class="stat-n mono"><b data-count="0.38" data-dec="2">0</b>%</span><p>Pérdida por intemperie<br><small>Norma: máx. 12 %</small></p></div>
+    <div class="stat"><span class="stat-n mono"><b data-count="100">0</b>%</span><p>Piedra con caras fracturadas<br><small>Cúbica y angulosa</small></p></div>
+    <div class="stat"><span class="stat-n mono"><b data-count="450">0</b><small>kg/cm²</small></span><p>Mezclas diseñadas<br><small>por el laboratorio, hasta</small></p></div>
+  </div>
+</section>
+
+<!-- ============ PROCESO (horizontal) ============ -->
+<section class="process" id="proceso">
+  <div class="process-pin" id="processPin">
+    <div class="process-head wrap">
+      <p class="kicker">03 — Proceso</p>
+      <h2 class="h2">Del cerro a tu obra.</h2>
+      <div class="process-progress"><i id="procProg"></i></div>
+    </div>
+    <div class="process-track" id="processTrack">
+      <article class="step">
+        <div class="step-media"><img src="assets/img/cerro-basalto.jpg" alt="Veta de basalto en la parte alta de la cantera" loading="lazy"></div>
+        <div class="step-body"><span class="step-n mono">01</span><h3>Extracción</h3><p>La veta de roca basáltica se identifica en la parte alta del cerro y se extrae de forma controlada.</p></div>
+      </article>
+      <article class="step">
+        <div class="step-media"><video src="assets/video/loop-tolva.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
+        <div class="step-body"><span class="step-n mono">02</span><h3>Trituración primaria</h3><p>La excavadora alimenta la tolva y la quebradora de mandíbula rompe los bloques de basalto.</p></div>
+      </article>
+      <article class="step">
+        <div class="step-media"><video src="assets/video/loop-trituradora.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
+        <div class="step-body"><span class="step-n mono">03</span><h3>Trituración secundaria</h3><p>El cono reduce la piedra a la granulometría exacta: piedra cúbica, 100 % triturada.</p></div>
+      </article>
+      <article class="step">
+        <div class="step-media"><video src="assets/video/loop-banda.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
+        <div class="step-body"><span class="step-n mono">04</span><h3>Cribado y acopio</h3><p>Las cribas separan 3/4", 1/2" y 3/8". Cada producto tiene su acopio identificado y medido.</p></div>
+      </article>
+      <article class="step">
+        <div class="step-media"><video src="assets/video/loop-carga.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
+        <div class="step-body"><span class="step-n mono">05</span><h3>Báscula y despacho</h3><p>Cada viaje se pesa en báscula certificada y sale con ticket digital y ficha técnica.</p></div>
+      </article>
+      <article class="step">
+        <div class="step-media"><video src="assets/video/loop-ciudad.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
+        <div class="step-body"><span class="step-n mono">06</span><h3>Entrega</h3><p>Flota propia de camiones JOB rumbo a tu obra, de Ciudad Arce a todo El Salvador.</p></div>
+      </article>
+      <div class="step step-end">
+        <p class="h3">¿Listo para tu primer viaje?</p>
+        <a href="#cotizar" class="btn btn-primary btn-lg magnetic"><span>Cotizar ahora</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRODUCTOS ============ -->
+<section class="products" id="productos">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">04 — Productos</p>
+        <h2 class="h2 split">Seis agregados. Una sola piedra.</h2>
+      </div>
+      <p class="sec-head-p">Todos salen del mismo basalto azul de Ciudad Arce. Elegí el producto, mirá su tamaño real y la tarifa pública por metro cúbico.</p>
+    </div>
+    <div class="prod-layout">
+      <div class="prod-list" id="prodList" role="tablist" aria-label="Productos"></div>
+      <div class="prod-detail" id="prodDetail" aria-live="polite">
+        <div class="pd-media"><img id="pdImg" src="assets/img/pila-grava.jpg" alt=""><div class="pd-badge" id="pdBadge">Recomendada</div></div>
+        <div class="pd-body">
+          <h3 id="pdName">Grava combinada No. 67</h3>
+          <p id="pdDesc"></p>
+          <div class="pd-tags" id="pdTags"></div>
+          <div class="pd-size">
+            <div class="pd-size-head"><span>Tamaño máximo</span><span class="mono" id="pdSizeTxt">19 mm</span></div>
+            <div class="size-stage" id="sizeStage" aria-hidden="true">
+              <div class="size-coin"><span>Moneda de $0.25<br>24 mm</span></div>
+              <div class="size-stone" id="sizeStone"></div>
+            </div>
+            <p class="pd-size-note">Escala aproximada junto a una moneda de 25 centavos.</p>
+          </div>
+          <div class="pd-price">
+            <div><span class="pp-k">En planta</span><span class="pp-v mono">$<b id="pdPrice">18</b><small>/m³</small></span></div>
+            <div><span class="pp-k">Viaje de 5 m³</span><span class="pp-v mono">$<b id="pdTrip">90</b></span></div>
+            <a href="#cotizar" class="btn btn-dark magnetic" id="pdQuote"><span>Cotizar este producto</span><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+          <p class="fine">Tarifa de lanzamiento propuesta, IVA incluido, precio en planta. Sujeta a confirmación.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CALIDAD ============ -->
+<section class="quality" id="calidad">
+  <div class="quality-bg"><video src="assets/video/loop-grava.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
+  <div class="wrap">
+    <div class="q-hero">
+      <p class="kicker light">05 — Calidad medida en laboratorio</p>
+      <div class="vs">
+        <div class="vs-a"><span class="vs-num mono"><b data-count="22">0</b>%</span><span class="vs-l">Nuestra piedra</span></div>
+        <div class="vs-mid">contra</div>
+        <div class="vs-b"><span class="vs-num mono">50%</span><span class="vs-l">Lo que permite la norma ASTM C33</span></div>
+      </div>
+      <p class="q-lead">Un laboratorio acreditado ante el OSA ensayó nuestra grava. Concluyó que produce <em>“agregados de excelente calidad intrínseca”</em> y que las gravas <em>“son adecuadas para concreto de alta resistencia”</em>.</p>
+    </div>
+
+    <div class="q-grid">
+      <div class="q-card q-bars">
+        <div class="q-card-head">
+          <h3>Cuánto del límite permitido usa nuestra piedra</h3>
+          <div class="seg" role="tablist" aria-label="Producto ensayado">
+            <button class="on" data-g="34" role="tab" aria-selected="true">Grava 3/4"</button>
+            <button data-g="12" role="tab" aria-selected="false">Grava 1/2"</button>
+          </div>
+        </div>
+        <p class="q-hint">Menos es mejor. 100 % sería apenas pasar la norma.</p>
+        <div class="bars" id="qBars"></div>
+        <p class="fine light">Fuente: Informe LSM-CCA-01-2026, CONSULTA S.A. de C.V., 22 de octubre de 2026. Muestras del 18/09/2026.</p>
+      </div>
+
+      <div class="q-card q-strength">
+        <h3>¿Para qué concreto sirve?</h3>
+        <p class="q-hint">El laboratorio diseñó mezclas con nuestras gravas en cuatro resistencias. Tocá una.</p>
+        <div class="steps-kg" id="kgSteps"></div>
+        <div class="kg-detail" id="kgDetail"></div>
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-head">
+        <div>
+          <h3>Ficha técnica de agregados</h3>
+          <p class="q-hint">Piedra volcánica triturada · Ciudad Arce, La Libertad</p>
+        </div>
+        <button class="btn btn-light btn-sm magnetic" id="specDownload"><span>Descargar ficha</span><svg viewBox="0 0 24 24"><path d="M12 4v11m0 0-5-5m5 5 5-5M5 20h14"/></svg></button>
+      </div>
+      <div class="spec-table" role="table" id="specTable"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LOGÍSTICA / MAPA ============ -->
+<section class="logistics" id="logistica">
+  <div class="wrap log-grid">
+    <div class="log-text">
+      <p class="kicker light">06 — Logística</p>
+      <h2 class="h2 split">Flota propia, rutas a todo El Salvador.</h2>
+      <p class="lead light">Desde Ciudad Arce, sobre el corredor San Salvador–Santa Ana, llegamos en menos de una hora a Lourdes, Opico, Santa Tecla y Santa Ana. Y con flota propia, a cualquier punto del país.</p>
+      <div class="zone-chips" id="zoneChips" role="group" aria-label="Filtrar por zona">
+        <button class="chip on" data-zone="">Todas</button>
+        <button class="chip" data-zone="A"><b>A</b> 0–15 km</button>
+        <button class="chip" data-zone="B"><b>B</b> 15–30 km</button>
+        <button class="chip" data-zone="C"><b>C</b> 30–45 km</button>
+        <button class="chip" data-zone="D"><b>D</b> +45 km</button>
+      </div>
+      <div class="zone-info" id="zoneInfo">
+        <div class="zi-row"><span>Destinos típicos</span><b id="ziPlaces">Toda la red de rutas activas</b></div>
+        <div class="zi-row"><span>Flete por viaje de 5 m³</span><b class="mono" id="ziFlete">$20 – $40</b></div>
+      </div>
+      <div class="live">
+        <div class="live-i"><span class="mono" id="lvRoutes">—</span><small>Rutas</small></div>
+        <div class="live-i"><span class="mono" id="lvKm">—</span><small>Km de red</small></div>
+        <div class="live-i"><span class="mono" id="lvTrucks">—</span><small>Camiones en ruta</small></div>
+      </div>
+    </div>
+    <div class="map-wrap">
+      <div class="map-canvas" id="routesMap"><div class="map-loading"><span></span>Cargando mapa 3D…</div></div>
+      <p class="map-note mono">Rutas reales por carretera · Visualización de la red de despacho</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VOCES ============ -->
+<section class="voices" id="voces">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">07 — Voces de la cantera</p>
+        <h2 class="h2 split">Lo cuentan quienes la construyeron.</h2>
+      </div>
+      <p class="sec-head-p">La dirección de Grupo JOB explica, desde la planta, por qué esta cantera cambia la forma de construir.</p>
+    </div>
+    <div class="voices-grid">
+      <div class="vp">
+        <div class="vp-frame">
+          <video id="vpVideo" playsinline preload="metadata" controls></video>
+          <div class="vp-quote" id="vpQuote"></div>
+        </div>
+      </div>
+      <ol class="vp-list" id="vpList"></ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ASÍ NACIÓ (antes/después + línea de tiempo) ============ -->
+<section class="origin" id="origen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">08 — Así nació</p>
+        <h2 class="h2 split">De terreno a planta en meses.</h2>
+      </div>
+      <p class="sec-head-p">Arrastrá para comparar el terreno al inicio del montaje con la planta en operación.</p>
+    </div>
+    <div class="ba" id="ba">
+      <img src="assets/img/planta-aerea.jpg" alt="Planta en operación, septiembre 2026" class="ba-after">
+      <div class="ba-before-wrap" id="baBefore"><img src="assets/img/montaje-planta.jpg" alt="Montaje de la planta, julio 2026" class="ba-before"></div>
+      <span class="ba-tag ba-tag-l mono">Julio 2026 · Montaje</span>
+      <span class="ba-tag ba-tag-r mono">Septiembre 2026 · Operación</span>
+      <div class="ba-handle" id="baHandle" role="slider" aria-label="Comparar antes y después" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0"><span><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
+    </div>
+    <ol class="timeline">
+      <li><span class="tl-d mono">Feb 2026</span><h4>Primeros vuelos</h4><p>Levantamiento del terreno en El Cafetalito, cantón Santa Rosa.</p></li>
+      <li><span class="tl-d mono">Jul 2026</span><h4>Montaje de planta</h4><p>Quebradora, cono, cribas y bandas transportadoras.</p></li>
+      <li><span class="tl-d mono">17 Sep 2026</span><h4>Primera trituración</h4><p>Prueba piloto. La grava 3/4" viaja a Condado Quetzal.</p></li>
+      <li><span class="tl-d mono">22 Oct 2026</span><h4>Informe de laboratorio</h4><p>CONSULTA certifica 22 % de desgaste y conformidad ASTM C33.</p></li>
+      <li class="now"><span class="tl-d mono">Nov 2026</span><h4>Lanzamiento</h4><p>Tarifa pública, ficha técnica y ventas a todo el país.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ CONDADO QUETZAL ============ -->
+<section class="anchor-client">
+  <div class="anchor-bg"><img src="assets/img/obra-colado.jpg" alt="" loading="lazy"></div>
+  <div class="wrap anchor-in">
+    <p class="kicker light">09 — De la cantera a tu casa</p>
+    <h2 class="h2">“Vamos a transformar esta cantera en materia prima para nuestras casas.”</h2>
+    <div class="anchor-stats">
+      <div><span class="mono"><b data-count="910">0</b>+</span><small>viviendas en Condado Quetzal</small></div>
+      <div><span class="mono"><b data-count="22">0</b> km</span><small>de la planta a la obra</small></div>
+      <div><span class="mono">3/4"</span><small>la primera grava despachada a la obra</small></div>
+    </div>
+    <p class="anchor-p">Condado Quetzal, el desarrollo de Acres Inmobiliaria en Quezaltepeque, es nuestro cliente ancla y la vitrina de calidad de cada metro cúbico que producimos.</p>
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="gallery" id="galeria">
+  <div class="wrap"><p class="kicker">10 — La cantera en imágenes</p></div>
+  <div class="marquee" data-dir="1">
+    <div class="mq-track">
+      <figure><img src="assets/img/trituradora-cenital.jpg" alt="Quebradora vista desde arriba" loading="lazy"></figure>
+      <figure><img src="assets/img/camion-frente.jpg" alt="Camión JOB" loading="lazy"></figure>
+      <figure><img src="assets/img/bandas-cielo.jpg" alt="Bandas transportadoras" loading="lazy"></figure>
+      <figure><img src="assets/img/carga-camion-aerea.jpg" alt="Carga de camión" loading="lazy"></figure>
+      <figure><img src="assets/img/foto-DSC05353.jpg" alt="Dirección de Cantera JOB junto a un camión" loading="lazy"></figure>
+      <figure><img src="assets/img/excavadora-tolva.jpg" alt="Excavadora alimentando la tolva" loading="lazy"></figure>
+      <figure><img src="assets/img/camiones-ciudad.jpg" alt="Camiones JOB en la ciudad" loading="lazy"></figure>
+    </div>
+  </div>
+  <div class="marquee" data-dir="-1">
+    <div class="mq-track">
+      <figure><img src="assets/img/logo-camion-macro.jpg" alt="Logo JOB Constructora en camión" loading="lazy"></figure>
+      <figure><img src="assets/img/cono-trituradora.jpg" alt="Cono triturador" loading="lazy"></figure>
+      <figure><img src="assets/img/bandas-aereas.jpg" alt="Bandas y cribas desde el aire" loading="lazy"></figure>
+      <figure><img src="assets/img/basalto-campo.jpg" alt="Roca basáltica" loading="lazy"></figure>
+      <figure><img src="assets/img/foto-DSC05317.jpg" alt="Dirección de Grupo JOB en la planta" loading="lazy"></figure>
+      <figure><img src="assets/img/ciudad-ruta.jpg" alt="Ruta de despacho" loading="lazy"></figure>
+      <figure><img src="assets/img/tolva-rocas.jpg" alt="Tolva con rocas" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ COTIZAR ============ -->
+<section class="quote" id="cotizar">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">11 — Cotizar</p>
+        <h2 class="h2 split">Tu cotización en segundos.</h2>
+      </div>
+      <p class="sec-head-p">Tocá tu departamento para ver a tu ejecutivo comercial, armá el pedido y obtené el total al instante. Precio claro, sin sorpresas.</p>
+    </div>
+
+    <div class="quote-grid">
+      <!-- Mapa + agentes -->
+      <div class="qz-left">
+        <div class="qz-map" id="selectMap"><div class="map-loading"><span></span>Cargando mapa…</div></div>
+        <div class="dept-pills" id="deptPills" aria-label="Departamentos"></div>
+        <div class="agents" id="agents">
+          <div class="agents-empty">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+            <p>Seleccioná un departamento en el mapa para ver a tu ejecutivo.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculadora -->
+      <form class="calc" id="calc" autocomplete="off" onsubmit="return false">
+        <div class="calc-head">
+          <h3>Calculadora de pedido</h3>
+          <span class="proto-tag mono">Prototipo</span>
+        </div>
+
+        <fieldset class="f">
+          <legend>1 · Material</legend>
+          <div class="mat-grid" id="matGrid"></div>
+        </fieldset>
+
+        <fieldset class="f">
+          <legend>2 · Cantidad</legend>
+          <div class="qty-mode seg" role="tablist">
+            <button type="button" class="on" data-mode="m3">Sé los m³</button>
+            <button type="button" data-mode="obra">Calcular por mi obra</button>
+          </div>
+          <div class="qty-m3" id="qtyM3">
+            <div class="range-row">
+              <input type="range" id="m3Range" min="5" max="700" step="5" value="40" aria-label="Metros cúbicos">
+              <div class="num-in"><input type="number" id="m3Num" min="1" max="5000" value="40" aria-label="Metros cúbicos"><span>m³</span></div>
+            </div>
+          </div>
+          <div class="qty-obra" id="qtyObra" hidden>
+            <div class="obra-row">
+              <label>Tipo de elemento
+                <select id="obraTipo">
+                  <option value="losa">Losa / piso</option>
+                  <option value="zapata">Cimentación / zapatas</option>
+                  <option value="muro">Muro / pared de concreto</option>
+                </select>
+              </label>
+              <label>Área (m²)<input type="number" id="obraArea" value="120" min="1"></label>
+              <label>Espesor (cm)<input type="number" id="obraEsp" value="12" min="1"></label>
+            </div>
+            <p class="obra-out" id="obraOut"></p>
+          </div>
+        </fieldset>
+
+        <fieldset class="f">
+          <legend>3 · Destino</legend>
+          <div class="dest-row">
+            <label class="grow">Lugar de entrega
+              <select id="destSel"></select>
+            </label>
+            <label class="km-l">Distancia
+              <div class="num-in"><input type="number" id="kmNum" min="0" max="400" value="22"><span>km</span></div>
+            </label>
+          </div>
+          <div class="zone-pill" id="zonePill"></div>
+        </fieldset>
+
+        <fieldset class="f">
+          <legend>4 · Camión</legend>
+          <div class="truck-grid" id="truckGrid"></div>
+          <label class="toggle"><input type="checkbox" id="pickup"><span class="tg"></span>Lo retiro en planta (sin flete)</label>
+          <label class="toggle"><input type="checkbox" id="promo" checked><span class="tg"></span>Promo de lanzamiento: 15 % en el primer viaje</label>
+        </fieldset>
+
+        <div class="calc-out" id="calcOut">
+          <div class="co-trucks" id="coTrucks" aria-hidden="true"></div>
+          <div class="co-lines" id="coLines"></div>
+          <div class="co-total">
+            <span>Total estimado <small>IVA incluido</small></span>
+            <b class="mono" id="coTotal">$0</b>
+          </div>
+          <div class="co-actions">
+            <a class="btn btn-wa magnetic" id="waBtn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg><span>Enviar por WhatsApp</span></a>
+            <button class="btn btn-light magnetic" id="printBtn" type="button"><span>Descargar cotización</span></button>
+          </div>
+          <p class="fine">Estimación con la tarifa de lanzamiento propuesta. Flete zona D estimado por km. El ejecutivo confirma precio y fecha de entrega.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="final-cta">
+  <div class="fc-bg"><img src="assets/img/camiones-ciudad.jpg" alt="" loading="lazy"></div>
+  <div class="wrap fc-in">
+    <h2 class="h1">22 % de desgaste.<br><span class="accent">Lo demás es cuento.</span></h2>
+    <div class="fc-cards">
+      <a href="#cotizar" class="glass-card"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg><h4>Cotizá en línea</h4><p>Material, cantidad y destino. Total al instante.</p><span>Cotizar →</span></a>
+      <a href="#calidad" class="glass-card"><svg viewBox="0 0 24 24"><path d="M9 3v6l-5 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-5-9V3M8 3h8"/></svg><h4>Ficha técnica</h4><p>Resultados de laboratorio con cada cotización.</p><span>Ver calidad →</span></a>
+      <a href="#logistica" class="glass-card"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><h4>Flota propia</h4><p>Entrega al día siguiente en zonas A y B.</p><span>Ver rutas →</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <img src="assets/brand/logo-white-text.png" alt="Cantera JOB">
+        <p>Planta de extracción y trituración de agregados de Grupo JOB. Caserío El Cafetalito, cantón Santa Rosa, Ciudad Arce, La Libertad, El Salvador.</p>
+      </div>
+      <div class="ft-col"><h5>Productos</h5><a href="#productos">Grava No. 67</a><a href="#productos">Grava 3/4" y 1/2"</a><a href="#productos">Chispa 3/8"</a><a href="#productos">Polvo y selecto</a></div>
+      <div class="ft-col"><h5>Empresa</h5><a href="#nosotros">Nosotros</a><a href="#calidad">Calidad</a><a href="#logistica">Logística</a><a href="#voces">Voces</a></div>
+      <div class="ft-col"><h5>Contacto</h5><a href="#cotizar">Cotizar</a><span>WhatsApp +503 7000-0000</span><span>ventas@canterajob.com</span><span>Lun–Sáb 6:00–16:00</span></div>
+    </div>
+    <div class="ft-group">
+      <span>Una empresa de</span>
+      <b>Grupo JOB</b><i></i><b>JOB Constructora</b><i></i><b>Acres Inmobiliaria</b>
+    </div>
+    <div class="ft-bottom">
+      <span>© 2026 Cantera JOB · Grava Santaneca, S.A. de C.V.</span>
+      <span>Datos de calidad: Informe LSM-CCA-01-2026, CONSULTA S.A. de C.V.</span>
+    </div>
+  </div>
+  <div class="ft-giant" aria-hidden="true">CANTERA JOB</div>
+</footer>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2z"/></svg></a>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- Cotización imprimible -->
+<div class="print-quote" id="printQuote" aria-hidden="true"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
