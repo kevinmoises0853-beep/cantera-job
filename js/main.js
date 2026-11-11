@@ -91,13 +91,24 @@ const srcset = p => `${wp(p, 480)} 480w, ${wp(p, 960)} 960w, ${wp(p, 1600)} 1600
   if (reduced) return;
   const fastNet = (conn.downlink || 0) >= 9;
   const q = (slowNet || w <= 700) ? '540' : ((w >= 1280 && fastNet) ? '1080' : '720');
-  v.src = `assets/video/hero-loop-${q}.mp4`;
-  v.preload = 'auto';
-  const tryPlay = () => v.play().catch(() => {});
-  v.addEventListener('canplay', tryPlay, { once: true });
-  // fuera de pantalla no decodifica ni compite con lo demás
-  new IntersectionObserver(es => es.forEach(e => { e.isIntersecting ? tryPlay() : v.pause(); }), { threshold: .05 }).observe(v);
+  const src = `assets/video/hero-loop-${q}.mp4`;
+  mediaOn(v, src);
+  // fuera de pantalla no decodifica ni deja descargas a medias
+  new IntersectionObserver(es => es.forEach(e => { e.isIntersecting ? mediaOn(v, src) : mediaOff(v); }), { threshold: .05 }).observe(v);
 })();
+
+/* Videos de fondo: se descargan solo en pantalla. Si salen de pantalla sin haber terminado de bajar,
+   se corta la descarga (un video a medias en pausa frena al resto de la página en HTTP/2). */
+function mediaOn(v, src) {
+  if (v.dataset.cur !== src) { v.dataset.cur = src; v.src = src; v.preload = 'auto'; }
+  v.play().catch(() => {});
+}
+function mediaOff(v) {
+  v.pause();
+  const d = v.duration, b = v.buffered;
+  const full = isFinite(d) && b.length && b.start(0) <= .3 && b.end(b.length - 1) >= d - .3;
+  if (!full && v.dataset.cur) { delete v.dataset.cur; v.removeAttribute('src'); v.load(); }
+}
 
 (function preload() {
   const pre = $('#preloader'); const num = $('#preNum'); const bar = $('#preBar');
@@ -208,10 +219,9 @@ $$('[data-count]').forEach(el => { if (!el.classList.contains('hc-num')) cio.obs
 /* ---------------- lazy videos (play only on screen) ---------------- */
 const vio = new IntersectionObserver(es => es.forEach(e => {
   const v = e.target;
-  if (e.isIntersecting) { if (v.preload === 'none') v.preload = 'auto'; v.play().catch(() => {}); }
-  else v.pause();
-}), { rootMargin: '200px' });
-$$('video[data-lazyvideo]').forEach(v => vio.observe(v));
+  e.isIntersecting ? mediaOn(v, v.dataset.src) : mediaOff(v);
+}), { rootMargin: '100px' });
+$$('video[data-lazyvideo]').forEach(v => { v.dataset.src = v.getAttribute('src'); v.removeAttribute('src'); if (!reduced) vio.observe(v); });
 
 /* ---------------- process horizontal scroll ---------------- */
 function setupProcess() {
@@ -249,15 +259,14 @@ setupProcess();
   // el avance mudo solo se descarga cuando la sección entra en pantalla
   new IntersectionObserver(es => es.forEach(e => {
     if (busy() || reduced) return;
-    if (e.isIntersecting) { if (!v.currentSrc) { v.src = TEASER; v.preload = 'auto'; } v.play().catch(() => {}); }
-    else v.pause();
+    e.isIntersecting ? mediaOn(v, TEASER) : mediaOff(v);
   }), { threshold: .3 }).observe(frame);
 
   // sin esperas antes de play(): Safari y iPhone exigen que arranque dentro del toque
   function start() {
     v.pause();
     v.innerHTML = '<track kind="subtitles" srclang="es" label="Español" src="assets/video/film-cantera-job.vtt" default>';
-    v.src = filmSrc(); v.preload = 'auto';
+    delete v.dataset.cur; v.src = filmSrc(); v.preload = 'auto';
     v.loop = false; v.muted = false; v.controls = false; v.load();
     frame.classList.add('playing'); frame.classList.remove('paused'); ctr.hidden = false;
     $('#fcProg').style.width = '0%';
@@ -275,7 +284,7 @@ setupProcess();
   v.addEventListener('ended', () => {
     if (!busy()) return;
     frame.classList.remove('playing', 'paused'); ctr.hidden = true;
-    v.innerHTML = ''; v.muted = true; v.loop = true; v.src = TEASER; v.play().catch(() => {});
+    v.innerHTML = ''; v.muted = true; v.loop = true; mediaOn(v, TEASER);
   });
 })();
 
