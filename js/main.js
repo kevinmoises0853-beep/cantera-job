@@ -89,7 +89,8 @@ const srcset = p => `${wp(p, 480)} 480w, ${wp(p, 960)} 960w, ${wp(p, 1600)} 1600
   const w = window.innerWidth;
   if (w <= 900) v.poster = 'assets/img/hero-poster-960.webp';
   if (reduced) return;
-  const q = (slowNet || w <= 700) ? '540' : (w < 1280 ? '720' : '1080');
+  const fastNet = (conn.downlink || 0) >= 9;
+  const q = (slowNet || w <= 700) ? '540' : ((w >= 1280 && fastNet) ? '1080' : '720');
   v.src = `assets/video/hero-loop-${q}.mp4`;
   v.preload = 'auto';
   const tryPlay = () => v.play().catch(() => {});
@@ -230,7 +231,18 @@ setupProcess();
   const frame = $('#filmFrame'), v = $('#filmVideo'), play = $('#filmPlay');
   const ctr = $('#filmControls');
   // 1080p ligera en pantallas grandes; 720p en celular, tablet o conexión lenta
-  const FILM = (slowNet || window.innerWidth < 1000) ? 'assets/video/film-cantera-job-720.mp4' : 'assets/video/film-cantera-job.mp4';
+  // Arranca en 720p (fluida con poca velocidad); 1080p solo si el navegador reporta conexión rápida o se toca "HD"
+  let hd = !slowNet && window.innerWidth >= 1000 && (conn.downlink || 0) >= 9;
+  const filmSrc = () => hd ? 'assets/video/film-cantera-job.mp4' : 'assets/video/film-cantera-job-720.mp4';
+  const hdBtn = $('#fcHD');
+  hdBtn.classList.toggle('on', hd);
+  hdBtn.addEventListener('click', () => {
+    hd = !hd; hdBtn.classList.toggle('on', hd);
+    if (!busy()) return;
+    const t = v.currentTime, wasPaused = v.paused;
+    v.src = filmSrc(); v.load();
+    v.addEventListener('loadedmetadata', () => { v.currentTime = t; if (!wasPaused) v.play().catch(() => {}); }, { once: true });
+  });
   const TEASER = 'assets/video/film-teaser.mp4';
   const busy = () => frame.classList.contains('playing') || frame.classList.contains('paused');
   if (window.innerWidth <= 700) v.poster = 'assets/video/film-cantera-job-poster-480.webp';
@@ -245,7 +257,7 @@ setupProcess();
   function start() {
     v.pause();
     v.innerHTML = '<track kind="subtitles" srclang="es" label="Español" src="assets/video/film-cantera-job.vtt" default>';
-    v.src = FILM; v.preload = 'auto';
+    v.src = filmSrc(); v.preload = 'auto';
     v.loop = false; v.muted = false; v.controls = false; v.load();
     frame.classList.add('playing'); frame.classList.remove('paused'); ctr.hidden = false;
     $('#fcProg').style.width = '0%';
