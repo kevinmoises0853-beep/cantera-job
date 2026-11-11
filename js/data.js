@@ -57,10 +57,11 @@ export function zoneForKm(km) {
 }
 
 // Flete estimado por viaje de 5 m³. Zona D: $40 + $0.95 por km adicional (estimado, se confirma al cotizar).
-export function fletePorViaje5(km) {
-  const z = zoneForKm(km);
+// Si se conoce la zona comercial del destino (plan), manda la zona; si no, se deduce de los km.
+export function fletePorViaje5(km, zone) {
+  const z = zone || zoneForKm(km);
   if (z !== 'D') return ZONES[z].flete;
-  return Math.round(40 + (km - 45) * 0.95);
+  return Math.max(45, Math.round(40 + (km - 45) * 0.95));
 }
 
 export const TRUCKS = [
@@ -130,27 +131,28 @@ export const DEPTS = {
   'la-union': { name: 'La Unión', region: 'oriente', km: 212 },
 };
 
-// Destinos típicos para el selector de la calculadora (km aproximados por carretera desde la planta)
+// Destinos de la red (km por carretera medidos con OSRM, iguales a data/rutas.json; zona según el plan comercial)
 export const PLACES = [
-  { name: 'Ciudad Arce', dept: 'la-libertad', km: 4 },
-  { name: 'San Juan Opico', dept: 'la-libertad', km: 11 },
-  { name: 'Sacacoyo', dept: 'la-libertad', km: 13 },
-  { name: 'Lourdes, Colón', dept: 'la-libertad', km: 15 },
-  { name: 'Quezaltepeque · Condado Quetzal', dept: 'la-libertad', km: 22 },
-  { name: 'Santa Tecla', dept: 'la-libertad', km: 27 },
-  { name: 'El Congo', dept: 'santa-ana', km: 26 },
-  { name: 'Armenia', dept: 'sonsonate', km: 31 },
-  { name: 'San Salvador', dept: 'san-salvador', km: 36 },
-  { name: 'Antiguo Cuscatlán', dept: 'la-libertad', km: 33 },
-  { name: 'Santa Ana', dept: 'santa-ana', km: 38 },
-  { name: 'Apopa', dept: 'san-salvador', km: 48 },
-  { name: 'Soyapango', dept: 'san-salvador', km: 46 },
-  { name: 'Sonsonate', dept: 'sonsonate', km: 52 },
-  { name: 'Chalchuapa', dept: 'santa-ana', km: 50 },
-  { name: 'Puerto de La Libertad', dept: 'la-libertad', km: 58 },
-  { name: 'Ahuachapán', dept: 'ahuachapan', km: 78 },
-  { name: 'Zacatecoluca', dept: 'la-paz', km: 88 },
-  { name: 'San Miguel', dept: 'san-miguel', km: 170 },
+  { id: 'ciudad-arce', name: 'Ciudad Arce', dept: 'la-libertad', km: 4, zone: 'A' },
+  { id: 'san-juan-opico', name: 'San Juan Opico', dept: 'la-libertad', km: 17, zone: 'A' },
+  { id: 'lourdes', name: 'Lourdes, Colón', dept: 'la-libertad', km: 23, zone: 'A' },
+  { id: 'sacacoyo', name: 'Sacacoyo', dept: 'la-libertad', km: 27, zone: 'A' },
+  { id: 'el-congo', name: 'El Congo', dept: 'santa-ana', km: 13, zone: 'B' },
+  { id: 'colon', name: 'Colón', dept: 'la-libertad', km: 23, zone: 'B' },
+  { id: 'quezaltepeque', name: 'Quezaltepeque · Condado Quetzal', dept: 'la-libertad', km: 29, zone: 'B' },
+  { id: 'santa-tecla', name: 'Santa Tecla', dept: 'la-libertad', km: 32, zone: 'B' },
+  { id: 'santa-ana', name: 'Santa Ana', dept: 'santa-ana', km: 28, zone: 'C' },
+  { id: 'armenia', name: 'Armenia', dept: 'sonsonate', km: 31, zone: 'C' },
+  { id: 'antiguo-cuscatlan', name: 'Antiguo Cuscatlán', dept: 'la-libertad', km: 36, zone: 'C' },
+  { id: 'san-salvador', name: 'San Salvador', dept: 'san-salvador', km: 48, zone: 'C' },
+  { id: 'chalchuapa', name: 'Chalchuapa', dept: 'santa-ana', km: 37, zone: 'D' },
+  { id: 'apopa', name: 'Apopa', dept: 'san-salvador', km: 40, zone: 'D' },
+  { id: 'soyapango', name: 'Soyapango', dept: 'san-salvador', km: 51, zone: 'D' },
+  { id: 'puerto-la-libertad', name: 'Puerto de La Libertad', dept: 'la-libertad', km: 55, zone: 'D' },
+  { id: 'sonsonate', name: 'Sonsonate', dept: 'sonsonate', km: 57, zone: 'D' },
+  { id: 'zacatecoluca', name: 'Zacatecoluca', dept: 'la-paz', km: 96, zone: 'D' },
+  { id: 'usulutan', name: 'Usulután', dept: 'usulutan', km: 153, zone: 'D' },
+  { id: 'san-miguel', name: 'San Miguel', dept: 'san-miguel', km: 178, zone: 'D' },
 ];
 
 export const WHATSAPP = '50370000000'; // número de ejemplo

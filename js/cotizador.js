@@ -64,10 +64,11 @@ export function initQuote({ toast, scrollTo }) {
     const truck = TRUCKS.find(t => t.id === state.truck);
     const m3 = state.mode === 'obra' ? obraM3() : state.m3;
     const km = state.km;
-    const zone = zoneForKm(km);
+    const place = sel.value === 'custom' ? null : PLACES[+sel.value];
+    const zone = place ? place.zone : zoneForKm(km);
     const trips = Math.ceil(m3 / truck.cap);
     const material = m3 * prod.price;
-    const fleteTrip = state.pickup ? 0 : Math.round(fletePorViaje5(km) * truck.factor);
+    const fleteTrip = state.pickup ? 0 : Math.round(fletePorViaje5(km, zone) * truck.factor);
     const flete = trips * fleteTrip;
     const volDisc = m3 >= 500 ? material * 0.08 : 0;
     const firstTrip = Math.min(truck.cap, m3) * prod.price + fleteTrip;
@@ -76,7 +77,7 @@ export function initQuote({ toast, scrollTo }) {
     last = { prod, truck, m3, km, zone, trips, material, fleteTrip, flete, volDisc, promo, total, place: sel.value === 'custom' ? `Destino a ${km} km` : PLACES[+sel.value].name };
 
     $('#zonePill').innerHTML = state.pickup ? '<b>P</b> Retiro en planta · Ciudad Arce' :
-      `<b>${zone}</b> ${ZONES[zone].label} · ${ZONES[zone].range} · flete ${zone === 'D' ? 'estimado ' : ''}${money0(fletePorViaje5(km))} por viaje de 5 m³`;
+      `<b>${zone}</b> ${ZONES[zone].label} · ${ZONES[zone].range} · flete ${zone === 'D' ? 'estimado ' : ''}${money0(fletePorViaje5(km, zone))} por viaje de 5 m³`;
 
     const tr = $('#coTrucks');
     const showN = Math.min(trips, 40);
@@ -127,8 +128,8 @@ export function initQuote({ toast, scrollTo }) {
 
   function renderAgents(id) {
     const d = DEPTS[id]; const list = AGENTS[d.region] || [];
-    const near = PLACES.filter(p => p.dept === id).map(p => p.km);
-    const km = near.length ? Math.min(...near) : (mapMod?.kmForDepartment?.(id) ?? d.km); const z = zoneForKm(km);
+    const near = PLACES.filter(p => p.dept === id).sort((a, b) => a.km - b.km)[0];
+    const km = near ? near.km : (mapMod?.kmForDepartment?.(id) ?? d.km); const z = near ? near.zone : zoneForKm(km);
     $('#agents').innerHTML = `
       <div class="ag-head"><h4>${d.name}</h4><span>Desde <b class="mono">${km} km</b> de la planta · Zona ${z}</span></div>
       <div class="ag-list">${list.map(a => `
@@ -182,7 +183,13 @@ export function initQuote({ toast, scrollTo }) {
     img.complete ? go() : (img.onload = go);
   });
 
+  // destino elegido desde el buscador de la red (sección 2)
+  window.__setDestination = (id) => {
+    const i = PLACES.findIndex(p => p.id === id); if (i < 0) return;
+    sel.value = i; state.dest = i; state.km = PLACES[i].km; $('#kmNum').value = state.km;
+    setDept(PLACES[i].dept, { fromSelect: true }); calc();
+  };
+
   setDept('la-libertad', { fromSelect: false });
-  sel.value = 4; state.dest = 4; state.km = PLACES[4].km; $('#kmNum').value = state.km;
-  calc();
+  window.__setDestination('quezaltepeque');
 }

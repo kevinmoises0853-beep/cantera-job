@@ -62,8 +62,11 @@ function counter(el, to, dur = 1.6, dec = 0) {
 }
 
 function heroIntro() {
+  if (window.__introDone) return;
+  window.__introDone = true;
   document.body.classList.remove('is-loading');
   lenis?.start();
+  setTimeout(() => window.dispatchEvent(new Event('intro:done')), 1200);
   if (!hasGSAP || reduced) { $$('.reveal-up').forEach(e => { e.style.opacity = 1; e.style.transform = 'none'; }); return; }
   const tl = gsap.timeline({ defaults: { ease: 'expo.out' } });
   tl.from('.hero-media video', { scale: 1.35, duration: 2.4, ease: 'power3.out' }, 0)
@@ -80,6 +83,8 @@ function heroIntro() {
   const vid = $('#heroVideo');
   if (!hasGSAP || reduced) { pre.remove(); heroIntro(); return; }
   lenis?.stop();
+  // seguro: si las animaciones se congelan (pestaña en segundo plano), nunca dejar la página bloqueada
+  setTimeout(() => { if (document.getElementById('preloader')) { gsap.killTweensOf('*'); pre.remove(); heroIntro(); } }, 4500);
   let ready = false;
   const markReady = () => { ready = true; };
   if (vid.readyState >= 3) markReady(); else { vid.addEventListener('canplay', markReady, { once: true }); setTimeout(markReady, 1400); }
@@ -116,7 +121,7 @@ burger.addEventListener('click', () => {
 });
 
 // active link
-const sections = ['nosotros', 'proceso', 'productos', 'calidad', 'logistica', 'voces'].map(id => $('#' + id)).filter(Boolean);
+const sections = ['red', 'nosotros', 'proceso', 'productos', 'calidad', 'logistica', 'voces'].map(id => $('#' + id)).filter(Boolean);
 const io = new IntersectionObserver(es => es.forEach(e => {
   if (e.isIntersecting) $$('.nav-links a').forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
 }), { rootMargin: '-45% 0px -50% 0px' });
@@ -308,31 +313,67 @@ setupProcess();
   $('#specDownload').addEventListener('click', () => toast('La ficha técnica completa se envía en PDF con cada cotización.'));
 })();
 
-/* ---------------- logistics map ---------------- */
-(async function logistics() {
+/* ---------------- red de despacho (sección 2) ---------------- */
+(async function network() {
   const el = $('#routesMap');
-  let ctl = null;
-  const chips = $$('#zoneChips .chip');
-  const setZoneInfo = z => {
-    if (!z) { $('#ziPlaces').textContent = 'Toda la red de rutas activas'; $('#ziFlete').textContent = '$20 – $40 · zona D a cotizar'; return; }
-    $('#ziPlaces').textContent = ZONES[z].places; $('#ziFlete').textContent = ZONES[z].flete ? `$${ZONES[z].flete}` : 'Según km · cotizar';
-  };
-  chips.forEach(c => c.addEventListener('click', () => { chips.forEach(x => x.classList.toggle('on', x === c)); const z = c.dataset.zone || null; setZoneInfo(z); ctl?.focusZone?.(z); }));
-  setZoneInfo(null);
-  const onStats = s => { if (!s) return; $('#lvRoutes').textContent = s.routes ?? '—'; $('#lvKm').textContent = s.km != null ? Math.round(s.km).toLocaleString('es-SV') : '—'; $('#lvTrucks').textContent = s.trucksActive ?? '—'; };
-  // montar cuando se acerca al viewport
+  let ctl = null, routes = [];
+  const norm = t => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const fleteTxt = r => ZONES[r.zone]?.flete ? `$${ZONES[r.zone].flete}` : 'Cotizar';
+  try { const d = await (await fetch('data/rutas.json')).json(); routes = d.routes; } catch {}
+  $('#finderList').innerHTML = routes.map(r => `<option value="${r.name}">`).join('');
+  if (routes.length) { $('#nRoutes').textContent = routes.length; $('#nKm').textContent = Math.round(routes.reduce((a, r) => a + r.km, 0)).toLocaleString('es-SV'); }
+
+  // leyenda / zonas
+  const legend = $('#netLegend');
+  let zone = null;
+  legend.addEventListener('click', e => {
+    const b = e.target.closest('button.nl'); if (!b) return;
+    zone = zone === b.dataset.zone ? null : b.dataset.zone;
+    $$('button.nl', legend).forEach(x => x.classList.toggle('on', x.dataset.zone === zone));
+    legend.classList.toggle('has-focus', !!zone);
+    ctl?.focusZone?.(zone);
+  });
+
+  // tarjeta + buscador "¿Dónde es tu obra?"
+  let current = null;
+  function showRoute(r) {
+    current = r;
+    ctl?.showDestination?.(r.id);
+    const f = $('#finder'); f.classList.remove('found'); void f.offsetWidth; f.classList.add('found');
+    $('#finderK').innerHTML = `Tu planta más cercana <small>(para ${r.name})</small>`;
+    $('#finderV').innerHTML = `<b>Cantera JOB</b> · <span class="mono">${Math.round(r.km)} km · ~${r.minutes} min · flete ${fleteTxt(r)}</span> <a href="#cotizar" class="finder-cta" data-dest="${r.id}">Cotizar →</a>`;
+  }
+  $('#finder').addEventListener('click', e => {
+    const a = e.target.closest('.finder-cta'); if (!a) return;
+    e.preventDefault(); window.__setDestination?.(a.dataset.dest); window.__scrollTo('#cotizar');
+  });
+  function find() {
+    const q = norm($('#finderIn').value); if (!q) { $('#finderIn').focus(); return; }
+    const r = routes.find(x => norm(x.name) === q) || routes.find(x => norm(x.name).includes(q)) || routes.find(x => q.includes(norm(x.name).split(' ')[0]));
+    if (r) showRoute(r);
+    else toast('Esa ruta todavía no está en el mapa. Escribinos y te cotizamos el flete hasta tu obra.');
+  }
+  $('#finderGo').addEventListener('click', find);
+  $('#finderIn').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); find(); } });
+  $('#finderIn').addEventListener('change', () => { const q = norm($('#finderIn').value); if (routes.some(x => norm(x.name) === q)) find(); });
+
+  const onStats = st => { if (!st) return; if (st.routes) $('#nRoutes').textContent = st.routes; if (st.km) $('#nKm').textContent = Math.round(st.km).toLocaleString('es-SV'); $('#nTrucks').textContent = st.trucksActive ?? '—'; };
   const mount = async () => {
     try {
       const mod = await import('./sv-map.js');
       el.querySelector('.map-loading')?.remove();
-      ctl = mod.mountSVMap(el, { mode: 'routes', onStats });
+      ctl = mod.mountSVMap(el, { mode: 'routes', theme: 'light', onStats });
       window.__routesMap = ctl;
+      if (zone) ctl.focusZone?.(zone);
+      if (current) ctl.showDestination?.(current.id);
     } catch (err) {
       console.warn('Mapa 3D no disponible todavía', err);
       el.querySelector('.map-loading').innerHTML = '<span></span>El mapa se está preparando…';
     }
   };
-  new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { o.disconnect(); mount(); } }), { rootMargin: '600px' }).observe(el);
+  // montar el mapa solo cuando terminó la intro y la sección se acerca (no compite con la portada)
+  const watch = () => new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { o.disconnect(); mount(); } }), { rootMargin: '300px' }).observe(el);
+  if (window.__introDone) setTimeout(watch, 1200); else window.addEventListener('intro:done', watch, { once: true });
 })();
 
 /* ---------------- voices ---------------- */

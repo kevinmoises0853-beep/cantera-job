@@ -648,3 +648,98 @@ input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
 }
+
+/* =========================================================
+   RED DE DESPACHO (sección 2, estilo Martin Marietta)
+   ========================================================= */
+.network { position: relative; background: linear-gradient(180deg, #fff 0%, var(--paper) 100%); padding: 92px 0 clamp(70px, 8vw, 110px); overflow: hidden; }
+.finder { position: relative; z-index: 3; display: grid; grid-template-columns: 1fr auto; gap: 26px; align-items: center; padding: 18px 18px 18px 30px; border-radius: 30px; background: var(--paper); border: 1px solid var(--line-dark); box-shadow: 0 18px 40px -28px rgba(11,17,24,.35); }
+.finder-l { display: flex; align-items: center; gap: 18px; min-width: 0; padding-right: 26px; border-right: 1px solid var(--line-dark); }
+.finder-pin { width: 30px; height: 30px; flex: none; fill: none; stroke: var(--blue); stroke-width: 1.8; }
+.finder-k { margin: 0; font-size: 15px; color: var(--muted); }
+.finder-k small { font-size: 12.5px; }
+.finder-v { margin: 2px 0 0; font-size: 17px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.finder-v b { color: var(--blue); font-family: var(--display); font-size: 21px; font-weight: 700; }
+.finder-v .mono { font-size: 15px; }
+.finder-r { display: grid; grid-template-columns: minmax(240px, 380px) auto; grid-template-rows: auto auto; column-gap: 14px; align-items: center; }
+.finder-r label { grid-column: 1; font-size: 15px; color: var(--muted); margin: 0 0 6px 4px; }
+.finder-in { grid-column: 1; grid-row: 2; display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 18px; border-radius: 999px; background: #fff; border: 1px solid var(--line-dark); transition: border-color .25s, box-shadow .25s; }
+.finder-in:focus-within { border-color: var(--blue); box-shadow: 0 0 0 4px rgba(36,99,208,.12); }
+.finder-in svg { width: 20px; height: 20px; flex: none; fill: none; stroke: var(--muted); stroke-width: 1.8; }
+.finder-in input { flex: 1; min-width: 0; border: 0; outline: none; background: none; font-size: 16px; }
+.finder-go { grid-column: 2; grid-row: 1 / span 2; width: 62px; height: 62px; border-radius: 50%; background: var(--blue); display: grid; place-items: center; box-shadow: 0 10px 24px -8px rgba(36,99,208,.8); transition: transform .3s var(--ease), background .3s; }
+.finder-go:hover { transform: scale(1.06); background: #2d70e6; }
+.finder-go svg { width: 24px; height: 24px; fill: none; stroke: #fff; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.finder.found .finder-l { animation: found .7s var(--ease); }
+@keyframes found { 0% { transform: translateY(6px); opacity: 0; } 100% { transform: none; opacity: 1; } }
+.net-head { text-align: center; margin: clamp(46px, 6vw, 80px) auto 0; }
+.net-head .kicker { justify-content: center; }
+.net-head .h2 { margin: 0 auto; max-width: 18ch; }
+.net-sub { margin: 18px 0 0; color: var(--muted); font-size: 17px; }
+.net-sub b { color: var(--ink); font-weight: 700; }
+.net-stage { position: relative; max-width: 1560px; margin: 10px auto 0; padding: 0 var(--gutter); }
+.net-map { position: relative; width: 100%; aspect-ratio: 2.1 / 1; min-height: 360px; }
+.net-legend { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 10px; z-index: 2; margin-top: -5%; }
+.nl { display: grid; grid-template-columns: 18px auto; column-gap: 12px; align-items: center; text-align: left; padding: 7px 12px 7px 8px; border-radius: 12px; transition: background .25s, opacity .25s; }
+.nl i { width: 14px; height: 14px; border-radius: 50%; background: var(--c); grid-row: span 2; box-shadow: 0 0 0 3px #fff, 0 0 0 4px rgba(11,17,24,.08); }
+.nl span { font-family: var(--display); font-weight: 600; font-size: 17px; line-height: 1.1; }
+.nl small { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+button.nl:hover { background: rgba(11,17,24,.05); }
+.net-legend.has-focus button.nl:not(.on) { opacity: .4; }
+button.nl.on { background: #fff; box-shadow: 0 8px 22px -12px rgba(11,17,24,.35); }
+.nl-pin { grid-template-columns: 18px auto; }
+.finder-cta { display: inline-flex; margin-left: 10px; padding: 6px 14px; border-radius: 999px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 600; vertical-align: 2px; transition: background .25s; }
+.finder-cta:hover { background: #2d70e6; }
+.nl-pin svg { width: 20px; height: 20px; margin-left: -2px; }
+.net-card { position: absolute; right: calc(var(--gutter) + 8px); top: 6%; z-index: 2; width: 300px; padding: 20px; border-radius: 20px; background: #fff; border: 1px solid var(--line-dark); box-shadow: 0 30px 60px -30px rgba(11,17,24,.45); animation: found .5s var(--ease); }
+.nc-top { display: flex; justify-content: space-between; align-items: center; }
+.nc-zone { font-size: 11px; letter-spacing: .1em; text-transform: uppercase; padding: 5px 10px; border-radius: 999px; background: var(--stone); color: var(--ink); }
+.nc-x { width: 30px; height: 30px; border-radius: 50%; font-size: 20px; line-height: 1; color: var(--muted); }
+.nc-x:hover { background: var(--stone); }
+.net-card h4 { font-size: 24px; margin: 12px 0 14px; }
+.nc-grid { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 10px; padding: 14px 0; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); margin-bottom: 16px; }
+.nc-grid small { display: block; font-size: 11px; color: var(--muted); }
+.nc-grid b { font-size: 17px; font-weight: 600; color: var(--ink); }
+.net-card .btn { width: 100%; justify-content: center; }
+@media (max-width: 1000px) {
+  .finder { grid-template-columns: 1fr; padding: 18px; border-radius: 24px; }
+  .finder-l { border-right: 0; padding-right: 0; padding-bottom: 16px; border-bottom: 1px solid var(--line-dark); }
+  .finder-v { white-space: normal; }
+  .finder-r { grid-template-columns: 1fr auto; }
+  .finder-go { width: 52px; height: 52px; grid-row: 2; }
+  .net-map { aspect-ratio: 4 / 3; min-height: 280px; }
+  .net-legend { margin-top: 8px; }
+  .network { padding-top: 84px; }
+}
+@media (max-width: 640px) {
+  .net-stage { padding: 0 6px; }
+  .net-map { aspect-ratio: 1.55 / 1; min-height: 220px; }
+  .net-legend { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2px; margin: 0 var(--gutter); }
+  .nl { padding: 6px; column-gap: 8px; grid-template-columns: 12px auto; }
+  .nl i { width: 10px; height: 10px; }
+  .nl span { font-size: 14px; }
+  .nl small { font-size: 9.5px; }
+  .nl-pin svg { width: 14px; height: 14px; }
+  .topbar { display: none; }
+  .nav { top: 0; }
+}
+
+/* ---------- flota propia (antes logística con mapa) ---------- */
+.fleet-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px, 5vw, 80px); align-items: center; }
+.fleet-grid > * { min-width: 0; }
+.fleet-table { margin-top: 34px; border-radius: 16px; border: 1px solid var(--line); overflow: hidden; font-size: 14.5px; }
+.ft-row { display: grid; grid-template-columns: 1fr 1.6fr auto; gap: 14px; padding: 14px 18px; align-items: center; border-top: 1px solid var(--line); }
+.ft-row.h { border-top: 0; background: rgba(255,255,255,.05); font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--w-dim); }
+.ft-row span:first-child { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+.ft-row i { width: 11px; height: 11px; border-radius: 50%; background: var(--c); flex: none; }
+.ft-row span:nth-child(2) { color: var(--w-dim); }
+.ft-row b { color: var(--amber-2); font-weight: 600; text-align: right; }
+.fleet-media { display: grid; gap: 14px; }
+.fm-video { position: relative; aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; background: var(--steel); }
+.fm-video video { width: 100%; height: 100%; object-fit: cover; }
+.fm-tag { position: absolute; left: 16px; top: 16px; padding: 7px 12px; border-radius: 999px; background: rgba(11,17,24,.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); font-size: 11.5px; color: #fff; letter-spacing: .05em; }
+.fm-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.fm-card { padding: 18px; border-radius: 16px; background: rgba(255,255,255,.04); border: 1px solid var(--line); }
+.fm-card b { display: block; font-size: 24px; font-weight: 500; letter-spacing: -.02em; color: #fff; }
+.fm-card span { display: block; margin-top: 6px; font-size: 13px; color: var(--w-dim); line-height: 1.4; }
+@media (max-width: 960px) { .fleet-grid { grid-template-columns: 1fr; } .fm-cards { grid-template-columns: 1fr; } .ft-row { grid-template-columns: 1fr auto; } .ft-row span:nth-child(2) { display: none; } }

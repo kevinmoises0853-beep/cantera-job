@@ -37,6 +37,7 @@
   <div class="wrap nav-in">
     <a href="#top" class="nav-logo" aria-label="Cantera JOB, inicio"><img src="assets/brand/logo-white-text.png" alt="Cantera JOB"></a>
     <nav class="nav-links" aria-label="Principal">
+      <a href="#red">Rutas</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#proceso">Proceso</a>
       <a href="#productos">Productos</a>
@@ -51,7 +52,7 @@
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#productos">Productos</a><a href="#calidad">Calidad</a><a href="#logistica">Logística</a><a href="#voces">Voces</a><a href="#cotizar" class="mm-cta">Cotizar ahora</a>
+  <a href="#red">Rutas</a><a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#productos">Productos</a><a href="#calidad">Calidad</a><a href="#logistica">Logística</a><a href="#voces">Voces</a><a href="#cotizar" class="mm-cta">Cotizar ahora</a>
 </div>
 
 <main id="top">
@@ -91,7 +92,49 @@
         <span>Basalto triturado</span><i>◆</i><span>100 % caras fracturadas</span><i>◆</i><span>Ficha técnica con cada carga</span><i>◆</i><span>Báscula certificada</span><i>◆</i><span>Flota propia</span><i>◆</i><span>Tarifa pública por m³</span><i>◆</i><span>Mezclas hasta 450 kg/cm²</span><i>◆</i>
       </div>
     </div>
-    <a href="#pelicula" class="scroll-cue" aria-label="Bajar"><span></span></a>
+    <a href="#red" class="scroll-cue" aria-label="Bajar"><span></span></a>
+  </div>
+</section>
+
+<!-- ============ RED DE DESPACHO (mapa estilo Martin Marietta) ============ -->
+<section class="network" id="red">
+  <div class="wrap">
+    <form class="finder" id="finder" autocomplete="off" onsubmit="return false">
+      <div class="finder-l">
+        <svg class="finder-pin" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>
+        <div>
+          <p class="finder-k" id="finderK">Tu planta más cercana <small>(según tu obra)</small></p>
+          <p class="finder-v" id="finderV"><b>Cantera JOB</b> · Caserío El Cafetalito, Ciudad Arce, La Libertad</p>
+        </div>
+      </div>
+      <div class="finder-r">
+        <label for="finderIn">¿Dónde es tu obra?</label>
+        <div class="finder-in">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></svg>
+          <input id="finderIn" list="finderList" placeholder="Municipio o ciudad — ej. Santa Tecla">
+          <datalist id="finderList"></datalist>
+        </div>
+        <button class="finder-go" id="finderGo" aria-label="Buscar ruta"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </form>
+
+    <div class="net-head">
+      <p class="kicker">01 — Red de despacho</p>
+      <h2 class="h2 split">De Ciudad Arce a todo El Salvador.</h2>
+      <p class="net-sub"><b class="mono" id="nRoutes">20</b> rutas activas · <b class="mono" id="nKm">978</b> km de carretera · <b class="mono" id="nTrucks">—</b> camiones en ruta ahora</p>
+    </div>
+  </div>
+
+  <div class="net-stage">
+    <div class="net-map" id="routesMap"><div class="map-loading"><span></span>Cargando mapa 3D…</div></div>
+    <div class="net-legend" id="netLegend" role="group" aria-label="Zonas de entrega">
+      <button class="nl" data-zone="A"><i style="--c:#4fc79a"></i><span>Zona A</span><small>0–15 km · $20</small></button>
+      <button class="nl" data-zone="B"><i style="--c:#5fb0e8"></i><span>Zona B</span><small>15–30 km · $30</small></button>
+      <button class="nl" data-zone="C"><i style="--c:#11679f"></i><span>Zona C</span><small>30–45 km · $40</small></button>
+      <button class="nl" data-zone="D"><i style="--c:#4a5058"></i><span>Zona D</span><small>+45 km · cotizar</small></button>
+      <span class="nl nl-grey"><i style="--c:#c9ccd0"></i><span>Bajo cotización</span><small>sin ruta fija aún</small></span>
+      <span class="nl nl-pin"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7z" fill="#fff" stroke="#2463d0" stroke-width="1.6"/><circle cx="12" cy="9" r="2.6" fill="#2463d0"/></svg><span>Destinos</span></span>
+    </div>
   </div>
 </section>
 
@@ -99,7 +142,7 @@
 <section class="film-sec" id="pelicula">
   <div class="wrap">
     <div class="film-head">
-      <p class="kicker">01 — La película</p>
+      <p class="kicker">02 — La película</p>
       <h2 class="h2 split">Una decisión estratégica que forma parte de los cimientos del país.</h2>
     </div>
   </div>
@@ -134,7 +177,7 @@
 <section class="about" id="nosotros">
   <div class="wrap about-grid">
     <div class="about-text">
-      <p class="kicker">02 — Nosotros</p>
+      <p class="kicker">03 — Nosotros</p>
       <h2 class="h2 split">Nace en el corazón de Ciudad Arce para abastecer al país.</h2>
       <p class="lead">Cantera JOB es la planta de extracción y trituración de agregados de <b>Grupo JOB</b> — JOB Constructora y Acres Inmobiliaria. Producimos grava de basalto para concreto, gravilla, chispa, polvo de piedra y material selecto.</p>
       <p>Abastecemos proyectos de infraestructura pública y privada y, como unidad estratégica, nuestros propios desarrollos inmobiliarios. Tenemos la materia prima, la maquinaria, los camiones y el punto de trituración: controlamos la calidad de principio a fin.</p>
@@ -164,7 +207,7 @@
 <section class="process" id="proceso">
   <div class="process-pin" id="processPin">
     <div class="process-head wrap">
-      <p class="kicker">03 — Proceso</p>
+      <p class="kicker">04 — Proceso</p>
       <h2 class="h2">Del cerro a tu obra.</h2>
       <div class="process-progress"><i id="procProg"></i></div>
     </div>
@@ -206,7 +249,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="kicker">04 — Productos</p>
+        <p class="kicker">05 — Productos</p>
         <h2 class="h2 split">Seis agregados. Una sola piedra.</h2>
       </div>
       <p class="sec-head-p">Todos salen del mismo basalto azul de Ciudad Arce. Elegí el producto, mirá su tamaño real y la tarifa pública por metro cúbico.</p>
@@ -244,7 +287,7 @@
   <div class="quality-bg"><video src="assets/video/loop-grava.mp4" muted loop playsinline preload="none" data-lazyvideo></video></div>
   <div class="wrap">
     <div class="q-hero">
-      <p class="kicker light">05 — Calidad medida en laboratorio</p>
+      <p class="kicker light">06 — Calidad medida en laboratorio</p>
       <div class="vs">
         <div class="vs-a"><span class="vs-num mono"><b data-count="22">0</b>%</span><span class="vs-l">Nuestra piedra</span></div>
         <div class="vs-mid">contra</div>
@@ -288,33 +331,28 @@
   </div>
 </section>
 
-<!-- ============ LOGÍSTICA / MAPA ============ -->
+<!-- ============ FLOTA PROPIA ============ -->
 <section class="logistics" id="logistica">
-  <div class="wrap log-grid">
+  <div class="wrap fleet-grid">
     <div class="log-text">
-      <p class="kicker light">06 — Logística</p>
-      <h2 class="h2 split">Flota propia, rutas a todo El Salvador.</h2>
-      <p class="lead light">Desde Ciudad Arce, sobre el corredor San Salvador–Santa Ana, llegamos en menos de una hora a Lourdes, Opico, Santa Tecla y Santa Ana. Y con flota propia, a cualquier punto del país.</p>
-      <div class="zone-chips" id="zoneChips" role="group" aria-label="Filtrar por zona">
-        <button class="chip on" data-zone="">Todas</button>
-        <button class="chip" data-zone="A"><b>A</b> 0–15 km</button>
-        <button class="chip" data-zone="B"><b>B</b> 15–30 km</button>
-        <button class="chip" data-zone="C"><b>C</b> 30–45 km</button>
-        <button class="chip" data-zone="D"><b>D</b> +45 km</button>
-      </div>
-      <div class="zone-info" id="zoneInfo">
-        <div class="zi-row"><span>Destinos típicos</span><b id="ziPlaces">Toda la red de rutas activas</b></div>
-        <div class="zi-row"><span>Flete por viaje de 5 m³</span><b class="mono" id="ziFlete">$20 – $40</b></div>
-      </div>
-      <div class="live">
-        <div class="live-i"><span class="mono" id="lvRoutes">—</span><small>Rutas</small></div>
-        <div class="live-i"><span class="mono" id="lvKm">—</span><small>Km de red</small></div>
-        <div class="live-i"><span class="mono" id="lvTrucks">—</span><small>Camiones en ruta</small></div>
+      <p class="kicker light">07 — Logística</p>
+      <h2 class="h2 split">Flota propia. Tu grava llega mañana.</h2>
+      <p class="lead light">Tenemos la materia prima, la maquinaria, los camiones y el punto de trituración. Controlamos la cadena completa: sin quiebres de inventario y con el peso exacto en cada viaje.</p>
+      <div class="fleet-table" role="table" aria-label="Flete por zona">
+        <div class="ft-row h" role="row"><span>Zona</span><span>Destinos típicos</span><span>Flete 5 m³</span></div>
+        <div class="ft-row" role="row"><span><i style="--c:#4fc79a"></i>A · 0–15 km</span><span>Ciudad Arce, Opico, Sacacoyo, Lourdes</span><b class="mono">$20</b></div>
+        <div class="ft-row" role="row"><span><i style="--c:#5fb0e8"></i>B · 15–30 km</span><span>Colón, Quezaltepeque, Santa Tecla, El Congo</span><b class="mono">$30</b></div>
+        <div class="ft-row" role="row"><span><i style="--c:#11679f"></i>C · 30–45 km</span><span>San Salvador, Antiguo Cuscatlán, Santa Ana, Armenia</span><b class="mono">$40</b></div>
+        <div class="ft-row" role="row"><span><i style="--c:#7d858f"></i>D · +45 km</span><span>Sonsonate, Chalchuapa, Apopa, Soyapango y resto del país</span><b class="mono">Cotizar</b></div>
       </div>
     </div>
-    <div class="map-wrap">
-      <div class="map-canvas" id="routesMap"><div class="map-loading"><span></span>Cargando mapa 3D…</div></div>
-      <p class="map-note mono">Rutas reales por carretera · Visualización de la red de despacho</p>
+    <div class="fleet-media">
+      <div class="fm-video"><video src="assets/video/loop-ciudad.mp4" muted loop playsinline preload="none" data-lazyvideo></video><span class="fm-tag mono"><i class="dot-live"></i>Camión JOB en ruta</span></div>
+      <div class="fm-cards">
+        <div class="fm-card"><b class="mono">2 p.m.</b><span>Pedí antes y te entregamos al día siguiente en zonas A y B.</span></div>
+        <div class="fm-card"><b class="mono">±0 kg</b><span>Báscula certificada y ticket digital por WhatsApp.</span></div>
+        <div class="fm-card"><b class="mono">14 m³</b><span>Camiones JOB de doble eje: mejor precio por metro cúbico.</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -324,7 +362,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="kicker">07 — Voces de la cantera</p>
+        <p class="kicker">08 — Voces de la cantera</p>
         <h2 class="h2 split">Lo cuentan quienes la construyeron.</h2>
       </div>
       <p class="sec-head-p">La dirección de Grupo JOB explica, desde la planta, por qué esta cantera cambia la forma de construir.</p>
@@ -346,7 +384,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="kicker">08 — Así nació</p>
+        <p class="kicker">09 — Así nació</p>
         <h2 class="h2 split">De terreno a planta en meses.</h2>
       </div>
       <p class="sec-head-p">Arrastrá para comparar el terreno al inicio del montaje con la planta en operación.</p>
@@ -372,11 +410,11 @@
 <section class="anchor-client">
   <div class="anchor-bg"><img src="assets/img/obra-colado.jpg" alt="" loading="lazy"></div>
   <div class="wrap anchor-in">
-    <p class="kicker light">09 — De la cantera a tu casa</p>
+    <p class="kicker light">10 — De la cantera a tu casa</p>
     <h2 class="h2">“Vamos a transformar esta cantera en materia prima para nuestras casas.”</h2>
     <div class="anchor-stats">
       <div><span class="mono"><b data-count="910">0</b>+</span><small>viviendas en Condado Quetzal</small></div>
-      <div><span class="mono"><b data-count="22">0</b> km</span><small>de la planta a la obra</small></div>
+      <div><span class="mono"><b data-count="29">0</b> km</span><small>de la planta a la obra</small></div>
       <div><span class="mono">3/4"</span><small>la primera grava despachada a la obra</small></div>
     </div>
     <p class="anchor-p">Condado Quetzal, el desarrollo de Acres Inmobiliaria en Quezaltepeque, es nuestro cliente ancla y la vitrina de calidad de cada metro cúbico que producimos.</p>
@@ -385,7 +423,7 @@
 
 <!-- ============ GALERÍA ============ -->
 <section class="gallery" id="galeria">
-  <div class="wrap"><p class="kicker">10 — La cantera en imágenes</p></div>
+  <div class="wrap"><p class="kicker">11 — La cantera en imágenes</p></div>
   <div class="marquee" data-dir="1">
     <div class="mq-track">
       <figure><img src="assets/img/trituradora-cenital.jpg" alt="Quebradora vista desde arriba" loading="lazy"></figure>
@@ -415,7 +453,7 @@
   <div class="wrap">
     <div class="sec-head">
       <div>
-        <p class="kicker">11 — Cotizar</p>
+        <p class="kicker">12 — Cotizar</p>
         <h2 class="h2 split">Tu cotización en segundos.</h2>
       </div>
       <p class="sec-head-p">Tocá tu departamento para ver a tu ejecutivo comercial, armá el pedido y obtené el total al instante. Precio claro, sin sorpresas.</p>
@@ -520,7 +558,7 @@
     <div class="fc-cards">
       <a href="#cotizar" class="glass-card"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h10M4 17h7"/></svg><h4>Cotizá en línea</h4><p>Material, cantidad y destino. Total al instante.</p><span>Cotizar →</span></a>
       <a href="#calidad" class="glass-card"><svg viewBox="0 0 24 24"><path d="M9 3v6l-5 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-5-9V3M8 3h8"/></svg><h4>Ficha técnica</h4><p>Resultados de laboratorio con cada cotización.</p><span>Ver calidad →</span></a>
-      <a href="#logistica" class="glass-card"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><h4>Flota propia</h4><p>Entrega al día siguiente en zonas A y B.</p><span>Ver rutas →</span></a>
+      <a href="#red" class="glass-card"><svg viewBox="0 0 24 24"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7M7 19a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm10 0a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg><h4>Flota propia</h4><p>Entrega al día siguiente en zonas A y B.</p><span>Ver rutas →</span></a>
     </div>
   </div>
 </section>

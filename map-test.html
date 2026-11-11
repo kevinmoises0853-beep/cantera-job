@@ -28,9 +28,39 @@
   .map.sel{height:min(56vh,520px);min-height:340px}
   .out{font:500 13px/1.5 'JetBrains Mono';color:#cfe3ff;margin-top:12px;min-height:20px}
   @media (max-width:700px){.stats{margin-left:0;gap:18px}.map{height:62vh;min-height:360px}}
+  .sl{background:linear-gradient(180deg,#f6f5f2 0%,#ffffff 100%);color:#0b1118;border-bottom:1px solid #e6e3dd}
+  .sl .eyebrow{color:#2463d0}
+  .sl p{color:rgba(16,27,39,.62)}
+  .sl .wrap{max-width:1360px}
+  .lbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 6px}
+  .lchip{font:600 12px/1 Inter;padding:9px 13px;border-radius:999px;border:1px solid #dcd9d3;background:#fff;color:#0b1118;cursor:pointer}
+  .lchip[aria-pressed=true]{background:#0b1118;border-color:#0b1118;color:#fff}
+  .lsearch{display:flex;gap:8px;align-items:center;margin-left:auto}
+  .lsearch input{font:500 14px Inter;padding:10px 14px;border-radius:999px;border:1px solid #dcd9d3;min-width:240px;background:#fff}
+  .lstats{display:flex;gap:26px;font:500 11px/1 Inter;color:rgba(16,27,39,.55);letter-spacing:.06em;text-transform:uppercase;margin-top:8px}
+  .lstats b{display:block;font:600 22px/1 'JetBrains Mono';color:#0b1118;margin-bottom:6px}
+  .lmap{position:relative;width:100%;aspect-ratio:2.1/1;max-height:640px}
+  @media (max-width:700px){.lmap{aspect-ratio:4/3}.lsearch{margin-left:0;width:100%}.lsearch input{flex:1;min-width:0}}
 </style>
 </head>
 <body>
+<section class="sl">
+  <div class="wrap">
+    <div class="eyebrow">Sección 2 · theme light</div>
+    <h2>Llegamos a toda tu obra</h2>
+    <p>Rutas reales desde Ciudad Arce. Pasá el cursor por un pin o una ruta.</p>
+    <div class="lbar" id="lchips">
+      <button class="lchip" data-z="" aria-pressed="true">Todas</button>
+      <button class="lchip" data-z="A">Zona A</button>
+      <button class="lchip" data-z="B">Zona B</button>
+      <button class="lchip" data-z="C">Zona C</button>
+      <button class="lchip" data-z="D">Zona D</button>
+      <div class="lsearch"><input id="lq" list="ldests" placeholder="¿Dónde es tu obra?"><datalist id="ldests"></datalist></div>
+    </div>
+    <div class="lstats"><div><b id="lst-r">–</b>Rutas</div><div><b id="lst-k">–</b>Km de red</div><div><b id="lst-t">–</b>Camiones en ruta</div></div>
+    <div class="lmap" id="map-light"></div>
+  </div>
+</section>
 <section class="s1">
   <div class="wrap">
     <div class="eyebrow">Cobertura · modo routes</div>
@@ -74,7 +104,20 @@
     mode: 'select',
     onSelect: (d) => { $('#out').textContent = JSON.stringify(d) + `  · zoneForDepartment=${zoneForDepartment(d.id)} kmForDepartment=${kmForDepartment(d.id)}`; },
   });
-  window.__maps = { routes, sel };
+  const light = mountSVMap($('#map-light'), {
+    mode: 'routes', theme: 'light', intro,
+    onStats: (s) => { $('#lst-r').textContent = s.routes; $('#lst-k').textContent = s.km; $('#lst-t').textContent = s.trucksActive; },
+  });
+  light.ready.then(() => {
+    const list = light.listDestinations();
+    $('#ldests').innerHTML = list.map((d) => `<option value="${d.name}">`).join('');
+    $('#lq').addEventListener('change', (e) => { const d = list.find((x) => x.name === e.target.value); light.showDestination(d ? d.id : null); });
+  });
+  document.querySelectorAll('#lchips [data-z]').forEach((b) => b.addEventListener('click', () => {
+    document.querySelectorAll('#lchips [data-z]').forEach((x) => x.setAttribute('aria-pressed', x === b));
+    light.focusZone(b.dataset.z || null);
+  }));
+  window.__maps = { routes, sel, light };
 </script>
 </body>
 </html>
