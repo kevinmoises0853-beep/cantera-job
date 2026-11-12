@@ -94,23 +94,23 @@ export const STRENGTHS = [
 // Agentes comerciales por departamento — PROTOTIPO, datos de ejemplo
 export const AGENTS = {
   occidente: [
-    { name: 'Andrea Mejía', role: 'Ejecutiva comercial · Occidente', phone: '+503 7000-0101', initials: 'AM', hue: 212 },
-    { name: 'Rodrigo Aguilar', role: 'Ferreterías y bloqueras · Occidente', phone: '+503 7000-0102', initials: 'RA', hue: 30 },
+    { name: 'Andrea Mejía', role: 'Ejecutiva comercial · Occidente', phone: '+503 7859 7168', initials: 'AM', hue: 212 },
+    { name: 'Rodrigo Aguilar', role: 'Ferreterías y bloqueras · Occidente', phone: '+503 7859 7168', initials: 'RA', hue: 30 },
   ],
   libertad: [
-    { name: 'Carlos Rivas', role: 'Ejecutivo comercial · Planta Ciudad Arce', phone: '+503 7000-0201', initials: 'CR', hue: 205 },
-    { name: 'Gabriela Lemus', role: 'Concreteras y prefabricadoras', phone: '+503 7000-0202', initials: 'GL', hue: 160 },
+    { name: 'Carlos Rivas', role: 'Ejecutivo comercial · Planta Ciudad Arce', phone: '+503 7859 7168', initials: 'CR', hue: 205 },
+    { name: 'Gabriela Lemus', role: 'Concreteras y prefabricadoras', phone: '+503 7859 7168', initials: 'GL', hue: 160 },
   ],
   metro: [
-    { name: 'Daniela Portillo', role: 'Ejecutiva comercial · Gran San Salvador', phone: '+503 7000-0301', initials: 'DP', hue: 220 },
-    { name: 'José Hernández', role: 'Constructoras y proyectos', phone: '+503 7000-0302', initials: 'JH', hue: 260 },
+    { name: 'Daniela Portillo', role: 'Ejecutiva comercial · Gran San Salvador', phone: '+503 7859 7168', initials: 'DP', hue: 220 },
+    { name: 'José Hernández', role: 'Constructoras y proyectos', phone: '+503 7859 7168', initials: 'JH', hue: 260 },
   ],
   centro: [
-    { name: 'Marcela Guardado', role: 'Ejecutiva comercial · Zona Central', phone: '+503 7000-0401', initials: 'MG', hue: 190 },
+    { name: 'Marcela Guardado', role: 'Ejecutiva comercial · Zona Central', phone: '+503 7859 7168', initials: 'MG', hue: 190 },
   ],
   oriente: [
-    { name: 'Luis Ventura', role: 'Ejecutivo comercial · Oriente', phone: '+503 7000-0501', initials: 'LV', hue: 25 },
-    { name: 'Ventas corporativas', role: 'Licitaciones y obra pública', phone: '+503 7000-0500', initials: 'VC', hue: 212 },
+    { name: 'Luis Ventura', role: 'Ejecutivo comercial · Oriente', phone: '+503 7859 7168', initials: 'LV', hue: 25 },
+    { name: 'Ventas corporativas', role: 'Licitaciones y obra pública', phone: '+503 7859 7168', initials: 'VC', hue: 212 },
   ],
 };
 
