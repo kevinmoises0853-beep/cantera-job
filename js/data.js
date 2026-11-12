@@ -155,4 +155,4 @@ export const PLACES = [
   { id: 'san-miguel', name: 'San Miguel', dept: 'san-miguel', km: 178, zone: 'D' },
 ];
 
-export const WHATSAPP = '50370000000'; // número de ejemplo
+export const WHATSAPP = '50378597168';
