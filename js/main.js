@@ -81,7 +81,7 @@ function heroIntro() {
 /* Peso según pantalla y conexión: el hosting entrega pocos Mbps, cada video va muy por debajo */
 const conn = navigator.connection || {};
 const slowNet = !!conn.saveData || /(^|-)2g$|3g/.test(conn.effectiveType || '');
-const IMG_CDN = 'https://cdn.jsdelivr.net/gh/kevinmoises0853-beep/cantera-job@a9a6360ff33b97d03cf1b930a9232764f97fcb44/';
+const IMG_CDN = 'https://cdn.jsdelivr.net/gh/kevinmoises0853-beep/cantera-job@225f08b467f4588a909ea092a1739bae26a342e4/';
 const wp = (p, w) => IMG_CDN + p.replace(/\.jpg$/, `-${w}.webp`);
 const srcset = p => `${wp(p, 480)} 480w, ${wp(p, 960)} 960w, ${wp(p, 1600)} 1600w`;
 
@@ -236,6 +236,34 @@ function setupProcess() {
   });
 }
 setupProcess();
+
+/* ---------------- despacho por báscula: cinco pasos, un video por paso ---------------- */
+(function dispatch() {
+  const stage = $('#dpStage'), v = $('#dpVideo'); if (!stage || !v) return;
+  const items = $$('#dpList .dp-item'), n = $('#dpN'), t = $('#dpT'), prog = $('#dpProg'), scale = $('#dpScale'), kg = $('#dpKg');
+  const KG = 15220; // lectura real del indicador durante la grabación (15 nov 2026)
+  let cur = 0, visible = false, counted = false;
+  v.poster = wp('assets/video/despacho-1.jpg', window.innerWidth <= 700 ? 480 : 1280);
+  const src = i => `assets/video/despacho-${i + 1}.mp4`;
+  function show(i, user) {
+    cur = (i + items.length) % items.length;
+    items.forEach((b, k) => b.classList.toggle('on', k === cur));
+    n.textContent = `0${cur + 1} / 0${items.length}`;
+    t.textContent = items[cur].querySelector('h4').textContent;
+    prog.style.transform = 'scaleX(0)';
+    const onScale = cur === 3; scale.classList.toggle('on', onScale);
+    if (onScale && !counted) { counted = true; hasGSAP && !reduced ? counter(kg, KG, 1.8) : (kg.textContent = KG.toLocaleString('es-SV')); }
+    if (visible && !reduced) mediaOn(v, src(cur)); else if (user) { v.poster = wp(`assets/video/despacho-${cur + 1}.jpg`, 1280); }
+    if (user && window.innerWidth <= 1000) items[cur].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  }
+  items.forEach((b, k) => b.addEventListener('click', () => show(k, true)));
+  v.addEventListener('timeupdate', () => { if (v.duration) prog.style.transform = `scaleX(${Math.min(1, v.currentTime / v.duration)})`; });
+  v.addEventListener('ended', () => show(cur + 1));
+  new IntersectionObserver(es => es.forEach(e => {
+    visible = e.isIntersecting;
+    visible && !reduced ? mediaOn(v, src(cur)) : mediaOff(v);
+  }), { rootMargin: '80px' }).observe(stage);
+})();
 
 /* ---------------- film ---------------- */
 (function film() {
