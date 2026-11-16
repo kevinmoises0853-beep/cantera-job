@@ -748,7 +748,7 @@ button.nl.on { background: #fff; box-shadow: 0 8px 22px -12px rgba(11,17,24,.35)
 .hero-media video, .film-frame video, .step-media video, .fm-video video, .quality-bg video { background: #0b1118; }
 
 /* ============ nov 2026 · titular nuevo + despacho por báscula ============ */
-.hero-title { font-size: clamp(50px, 8.6vw, 158px); line-height: .9; }
+.hero-title { font-size: clamp(50px, 9.4vw, 172px); line-height: .9; }
 .sec-head-p.light { color: var(--w-dim); }
 .dispatch { position: relative; background: linear-gradient(180deg, var(--ink) 0%, #0f1b29 100%); color: #fff; padding: clamp(90px, 11vw, 160px) 0; overflow: hidden; }
 .dispatch .h2 { max-width: 17ch; }
@@ -782,4 +782,4 @@ button.nl.on { background: #fff; box-shadow: 0 8px 22px -12px rgba(11,17,24,.35)
   .dp-list li { flex: 0 0 78%; scroll-snap-align: start; }
   .dp-stage { border-radius: 18px; }
 }
-@media (max-width: 640px) { .hero-title { font-size: clamp(46px, 13.2vw, 64px); } .dp-scale { right: 12px; bottom: 18px; padding: 9px 12px 8px; } .dp-hud { left: 14px; top: 12px; } }
+@media (max-width: 640px) { .hero-title { font-size: clamp(38px, 10.8vw, 60px); } .dp-scale { right: 12px; bottom: 18px; padding: 9px 12px 8px; } .dp-hud { left: 14px; top: 12px; } }
