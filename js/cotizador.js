@@ -177,7 +177,7 @@ export function initQuote({ toast, scrollTo }) {
       </table>
       <p><b>Calidad:</b> desgaste Los Ángeles 22 % (norma ≤ 50 %), sanidad 0.38 %, 100 % caras fracturadas. Informe LSM-CCA-01-2026, CONSULTA S.A. de C.V.</p>
       ${agent ? `<p><b>Ejecutivo:</b> ${agent.name} · ${agent.phone}</p>` : ''}
-      <p style="color:#666;font-size:9pt">Prototipo: tarifa de lanzamiento propuesta. Precio y fecha de entrega se confirman con el ejecutivo comercial.</p>`;
+      <p style="color:#666;font-size:9pt">Tarifa de lanzamiento. Precio y fecha de entrega se confirman con el ejecutivo comercial.</p>`;
     const img = $('#printQuote img');
     const go = () => window.print();
     img.complete ? go() : (img.onload = go);
