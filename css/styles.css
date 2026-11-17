@@ -783,3 +783,8 @@ button.nl.on { background: #fff; box-shadow: 0 8px 22px -12px rgba(11,17,24,.35)
   .dp-stage { border-radius: 18px; }
 }
 @media (max-width: 640px) { .hero-title { font-size: clamp(38px, 10.8vw, 60px); } .dp-scale { right: 12px; bottom: 18px; padding: 9px 12px 8px; } .dp-hud { left: 14px; top: 12px; } }
+
+/* título de Proceso en una sola línea en escritorio (la sección está fijada a 100vh) */
+@media (min-width: 861px) {
+  .process-head .h2 { max-width: none; white-space: nowrap; font-size: clamp(30px, 3.5vw, 56px); }
+}
